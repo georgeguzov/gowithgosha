@@ -74,7 +74,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 glass-red rounded-full px-4 py-2 text-sm mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-[#c8102e] animate-pulse" />
-          <span className="text-[#f5f0e8]/80">Авторский тур · 3–11 октября 2025</span>
+          <span className="text-[#f5f0e8]/80">Авторский тур · 3–11 октября 2026</span>
         </motion.div>
 
         {/* Main heading */}
@@ -111,7 +111,7 @@ export default function Hero() {
             href="#booking"
             className="group relative px-8 py-4 bg-[#c8102e] rounded-full text-white font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
           >
-            <span className="relative z-10">Хочу в тур — $1&nbsp;890</span>
+            <span className="relative z-10">Хочу в тур</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#c8102e] to-[#ff3355] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a

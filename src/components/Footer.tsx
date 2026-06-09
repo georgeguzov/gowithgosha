@@ -14,9 +14,8 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-[#f5f0e8]/40 text-center">
             <span>Чэнду + Чунцин</span>
             <span className="hidden sm:inline">·</span>
-            <span>3–11 октября 2025</span>
+            <span>3–11 октября 2026</span>
             <span className="hidden sm:inline">·</span>
-            <span>$1 890</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -40,7 +39,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/[0.04] text-center text-xs text-[#f5f0e8]/20">
-          © 2025 Гоша Гузов · Все права защищены
+          © 2026 Гоша Гузов · Все права защищены
         </div>
       </div>
     </footer>
