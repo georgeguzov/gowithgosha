@@ -5,17 +5,17 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const chengdu = [
-  { src: "/ченду-панда-1.jpg", label: "Центр панд", span: "col-span-1 row-span-2" },
-  { src: "/ченду-1.jpg",       label: "Чэнду",      span: "col-span-1 md:col-span-2 row-span-1" },
-  { src: "/ченду-мост.jpg",    label: "Мост",       span: "col-span-1 md:col-span-2 row-span-1" },
+  { src: "/ченду-панда-1.jpg", label: "Chengdu, China", span: "col-span-1 row-span-2" },
+  { src: "/ченду-1.jpg",       label: "Chengdu, China",      span: "col-span-1 md:col-span-2 row-span-1" },
+  { src: "/ченду-мост.jpg",    label: "Chengdu, China",       span: "col-span-1 md:col-span-2 row-span-1" },
 ];
 
 const chongqing = [
-  { src: "/чунцин-старый-город-4.jpg",      label: "Старый город",    span: "col-span-1 row-span-1" },
-  { src: "/чунцин-поезд-через-здание.jpg",  label: "Поезд сквозь дом", span: "col-span-1 row-span-2" },
-  { src: "/чунцин-ночной.jpg",              label: "Ночной Чунцин",   span: "col-span-1 row-span-1" },
-  { src: "/чунцин-ночной-3.jpg",            label: "Ночной Чунцин",   span: "col-span-1 row-span-1" },
-  { src: "/чунцин-киберпанк.jpg",           label: "Киберпанк",       span: "col-span-1 row-span-1" },
+  { src: "/чунцин-старый-город.jpg",        label: "Chongqing, China",    span: "col-span-1 row-span-1" },
+  { src: "/чунцин-поезд-через-здание.jpg",  label: "Chongqing, China", span: "col-span-1 row-span-2" },
+  { src: "/чунцин-старый-город-4.jpg",      label: "Chongqing, China",   span: "col-span-1 row-span-1" },
+  { src: "/чунцин-ночной-3.jpg",            label: "Chongqing, China",   span: "col-span-1 row-span-1" },
+  { src: "/чунцин-киберпанк.jpg",           label: "Chongqing, China",       span: "col-span-1 row-span-1" },
 ];
 
 function PhotoCard({ src, label, span, index, inView }: {
