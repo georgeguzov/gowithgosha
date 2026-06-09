@@ -8,6 +8,7 @@ const chengdu = [
   { src: "/ченду-панда-1.jpg", label: "Chengdu, China", span: "col-span-1 row-span-1" },
   { src: "/ченду-1.jpg",       label: "Chengdu, China", span: "col-span-1 row-span-1" },
   { src: "/ченду-2.jpg",       label: "Chengdu, China", span: "col-span-1 row-span-1" },
+  { src: "/панда-3.jpg",       label: "Chengdu, China", span: "col-span-1 row-span-1" },
 ];
 
 const chongqing = [

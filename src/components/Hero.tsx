@@ -5,18 +5,18 @@ import { useRef } from "react";
 import Image from "next/image";
 
 const floatingEmojis = [
-  { emoji: "🐼", x: "10%", delay: 0, size: "text-4xl" },
-  { emoji: "🏮", x: "85%", delay: 0.5, size: "text-3xl" },
-  { emoji: "🌃", x: "70%", delay: 1, size: "text-2xl" },
-  { emoji: "🍜", x: "20%", delay: 1.5, size: "text-3xl" },
-  { emoji: "🏔️", x: "90%", delay: 0.8, size: "text-2xl" },
-  { emoji: "🎭", x: "5%", delay: 1.2, size: "text-2xl" },
+  { emoji: "🐼", x: "8%",  delay: 0,   size: "text-4xl" },
+  { emoji: "🏮", x: "82%", delay: 0.5, size: "text-3xl" },
+  { emoji: "🌃", x: "68%", delay: 1,   size: "text-2xl" },
+  { emoji: "🍜", x: "18%", delay: 1.5, size: "text-3xl" },
+  { emoji: "🏔️", x: "85%", delay: 0.8, size: "text-2xl" },
+  { emoji: "🎭", x: "5%",  delay: 1.2, size: "text-2xl" },
 ];
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
