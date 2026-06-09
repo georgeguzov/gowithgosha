@@ -66,7 +66,7 @@ export default function Gallery() {
             <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 auto-rows-[130px] md:auto-rows-[180px]">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 auto-rows-[180px] md:auto-rows-[240px]">
             {chengdu.map((photo, i) => (
               <PhotoCard key={photo.src} {...photo} index={i} inView={inView} />
             ))}
@@ -86,7 +86,7 @@ export default function Gallery() {
             <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 auto-rows-[130px] md:auto-rows-[180px]">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 auto-rows-[180px] md:auto-rows-[240px]">
             {chongqing.map((photo, i) => (
               <PhotoCard key={photo.src} {...photo} index={i} inView={inView} />
             ))}
