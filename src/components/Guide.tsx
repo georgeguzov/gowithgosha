@@ -16,9 +16,9 @@ export default function Guide() {
 
   return (
     <section ref={ref} className="relative py-24 px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_50%,rgba(200,16,46,0.06),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_50%,rgba(200,16,46,0.06),transparent)] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left — Avatar & flags */}
           <motion.div
