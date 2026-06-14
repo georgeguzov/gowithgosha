@@ -88,19 +88,19 @@ const days = [
   },
 ];
 
-function DayCard({ d, index, inView }: { d: typeof days[0]; index: number; inView: boolean }) {
-  const [open, setOpen] = useState(false);
-
+function DayCard({ d, open, onToggle }: {
+  d: typeof days[0]; open: boolean; onToggle: () => void;
+}) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.06 }}
+      initial={{ opacity: 0, y: 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4 }}
       className="day-card glass rounded-2xl overflow-hidden cursor-pointer hover:border-white/15 transition-all duration-300"
-      onClick={() => setOpen(!open)}
+      onClick={onToggle}
     >
       <div className="p-5 md:p-6 flex items-start gap-4">
-        {/* Day number */}
         <div className="shrink-0">
           <div className="day-number text-5xl md:text-6xl font-bold text-[#f5f0e8]/10 leading-none transition-all duration-300 select-none">
             {String(d.day).padStart(2, "0")}
@@ -164,10 +164,18 @@ function DayCard({ d, index, inView }: { d: typeof days[0]; index: number; inVie
 export default function Program() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [openDay, setOpenDay] = useState<number | null>(null);
 
   return (
     <section ref={ref} id="program" className="relative py-24 px-6">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_100%_30%,rgba(0,100,200,0.07),transparent)] pointer-events-none" />
+
+      {/* Preload all day images so they're instant when opened */}
+      <div className="hidden">
+        {days.map(d => (
+          <Image key={d.day} src={d.image} alt="" width={1} height={1} priority />
+        ))}
+      </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div
@@ -184,8 +192,13 @@ export default function Program() {
         </motion.div>
 
         <div className="space-y-3">
-          {days.map((d, i) => (
-            <DayCard key={d.day} d={d} index={i} inView={inView} />
+          {days.map((d) => (
+            <DayCard
+              key={d.day}
+              d={d}
+              open={openDay === d.day}
+              onToggle={() => setOpenDay(openDay === d.day ? null : d.day)}
+            />
           ))}
         </div>
       </div>
