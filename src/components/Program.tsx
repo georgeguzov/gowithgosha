@@ -93,10 +93,10 @@ function DayCard({ d, open, onToggle }: {
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 16 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
       className="day-card glass rounded-2xl overflow-hidden cursor-pointer hover:border-white/15 transition-all duration-300"
       onClick={onToggle}
     >

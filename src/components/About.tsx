@@ -20,10 +20,10 @@ export default function About() {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={vp}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
           <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">О туре</p>
@@ -34,10 +34,10 @@ export default function About() {
         </motion.div>
 
         <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={vp}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="glass-red rounded-3xl p-8 md:p-12 mb-16 text-center"
         >
           <p className="text-lg md:text-xl lg:text-2xl text-[#f5f0e8]/90 leading-relaxed max-w-3xl mx-auto">
@@ -54,10 +54,10 @@ export default function About() {
           {features.map((f, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 16 }}
+              whileInView={{ y: 0 }}
               viewport={vp}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
+              transition={{ duration: 0.35, ease: "easeOut", delay: i * 0.04 }}
               className="glass rounded-2xl p-6 group hover:border-[#c8102e]/30 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="text-3xl mb-3">{f.icon}</div>
