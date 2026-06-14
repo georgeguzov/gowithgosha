@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const features = [
   { icon: "🌏", title: "Не экскурсия, а путешествие", desc: "Мы не бежим от точки к точке. Здесь важны атмосфера, люди и впечатления." },
@@ -12,20 +11,19 @@ const features = [
   { icon: "⚡", title: "Каждый день — новая история", desc: "От панд и древних храмов до ночного Чунцина и природных чудес Сычуани." },
 ];
 
-export default function About() {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+const vp = { once: true, margin: "-60px" } as const;
 
+export default function About() {
   return (
-    <section ref={ref} className="relative py-24 px-6 overflow-hidden" id="about">
+    <section className="relative py-24 px-6 overflow-hidden" id="about">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_0%_50%,rgba(200,16,46,0.08),transparent)] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">О туре</p>
@@ -35,11 +33,11 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* Big quote */}
         <motion.blockquote
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.6 }}
           className="glass-red rounded-3xl p-8 md:p-12 mb-16 text-center"
         >
           <p className="text-lg md:text-xl lg:text-2xl text-[#f5f0e8]/90 leading-relaxed max-w-3xl mx-auto">
@@ -52,14 +50,14 @@ export default function About() {
           </p>
         </motion.blockquote>
 
-        {/* Features grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 * i + 0.3 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
               className="glass rounded-2xl p-6 group hover:border-[#c8102e]/30 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="text-3xl mb-3">{f.icon}</div>
