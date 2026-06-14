@@ -39,7 +39,7 @@ export default function Pricing() {
         >
           <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Стоимость</p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Панды и Киберпанк&nbsp;— <span className="gradient-text">$&thinsp;1&thinsp;890</span>
+            Панды и Киберпанк&nbsp;— <span className="gradient-text">$&thinsp;1&thinsp;390</span>
           </h2>
           <p className="text-[#f5f0e8]/50 max-w-xl mx-auto">
             Мы уже организовали маршрут, отели, трансферы и все основные активности. Вам остаётся купить билет и наслаждаться путешествием.
