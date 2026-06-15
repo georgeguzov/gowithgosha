@@ -22,7 +22,7 @@ const trips = [
     country: "Индонезия",
     title: "Неизведанная Индонезия",
     subtitle: "Бали + Ява + Комодо",
-    dates: "Осень 2026",
+    dates: "Осень-Зима 2026",
     duration: "—",
     price: "Скоро",
     image: "/индонезия.jpg",
