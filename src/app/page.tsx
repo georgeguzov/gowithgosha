@@ -22,7 +22,7 @@ const trips = [
     country: "Индонезия",
     title: "Неизведанная Индонезия",
     subtitle: "Бали + Ява + Комодо",
-    dates: "Осень-Зима 2026",
+    dates: "Зима 2026",
     duration: "—",
     price: "Скоро",
     image: "/индонезия.jpg",
@@ -32,9 +32,12 @@ const trips = [
 ];
 
 const countries = [
-  "🇯🇵", "🇹🇭", "🇻🇳", "🇮🇩", "🇮🇳", "🇲🇦", "🇹🇷", "🇮🇹",
-  "🇫🇷", "🇪🇸", "🇵🇹", "🇩🇪", "🇬🇧", "🇺🇸", "🇲🇽", "🇧🇷",
-  "🇦🇺", "🇳🇿", "🇿🇦", "🇰🇪", "🇨🇳", "🇸🇬", "🇰🇷", "🇺🇦",
+  "🇧🇾", "🇷🇺", "🇺🇦", "🇱🇹", "🇱🇻", "🇵🇱", "🇭🇺", "🇨🇿",
+  "🇫🇷", "🇮🇹", "🇪🇸", "🇵🇹", "🇲🇨", "🇻🇦", "🇨🇭", "🇲🇹",
+  "🇹🇳", "🇹🇷", "🇪🇬", "🇬🇪", "🇦🇹", "🇧🇦", "🇭🇷", "🇸🇰",
+  "🇨🇳", "🇮🇩", "🇸🇬", "🇰🇭", "🇻🇳", "🇲🇾", "🇺🇿", "🇪🇪",
+  "🇫🇮", "🇷🇴", "🇧🇬", "🇲🇰", "🇦🇱", "🇲🇪", "🇬🇷", "🇯🇵",
+  "🇭🇰", "🇨🇾", "🇮🇸", "🇷🇸", "🇦🇺",
 ];
 
 export default function HomePage() {
@@ -64,28 +67,21 @@ export default function HomePage() {
           <div className="text-center md:text-left">
             <p className="text-[#c8102e] text-xs font-semibold uppercase tracking-[0.3em] mb-2">Авторские туры</p>
             <h1 className="text-3xl md:text-5xl font-bold mb-4">
-              Гоша <span className="gradient-text">Гузов</span>
+              Go <span className="gradient-text">With Gosha</span>
             </h1>
             <p className="text-[#f5f0e8]/60 leading-relaxed max-w-xl mb-6">
-              Путешествую по миру уже 5+ лет, побывал в&nbsp;
-              <span className="text-[#d4a843] font-semibold">45+ странах</span>. Создаю небольшие авторские туры,
-              где всё уже организовано, а каждый день — новая история. Без скучных экскурсий и туристического конвейера.
+              За последние 5 лет я побывал в&nbsp;
+              <span className="text-[#d4a843] font-semibold">45+ странах</span> и понял одну вещь: лучшие воспоминания
+              рождаются не на экскурсиях, а в неожиданных моментах. Поэтому я создаю небольшие авторские туры,
+              где уже продумана вся логистика, а участникам остаётся главное — наслаждаться путешествием
+              и проживать каждую историю вместе.
             </p>
 
             {/* Country flags */}
             <div className="flex flex-wrap gap-1.5 justify-center md:justify-start mb-6">
               {countries.map((flag, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.4 + i * 0.02, type: "spring", stiffness: 200 }}
-                  className="text-xl"
-                >
-                  {flag}
-                </motion.span>
+                <span key={i} className="text-xl">{flag}</span>
               ))}
-              <span className="text-xs text-[#f5f0e8]/30 self-center ml-1">и ещё 20+</span>
             </div>
 
             {/* Social links */}
@@ -105,6 +101,14 @@ export default function HomePage() {
                 className="glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-all duration-300"
               >
                 Instagram 📸
+              </a>
+              <a
+                href="https://instagram.com/g.zov"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-all duration-300"
+              >
+                @g.zov 📷
               </a>
             </div>
           </div>
