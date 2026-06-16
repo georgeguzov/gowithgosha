@@ -6,11 +6,12 @@ import Program from "@/components/Program";
 import Guide from "@/components/Guide";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
+import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Панды и Киберпанк — Авторский тур в Китай",
-  description: "Чэнду + Чунцин, 3–11 октября 2026. Авторский тур.",
+  description: "Чэнду + Чунцин, 10–18 октября 2026. Авторский тур.",
 };
 
 export default function ChinaPage() {
@@ -24,6 +25,7 @@ export default function ChinaPage() {
       <Guide />
       <Pricing />
       <FAQ />
+      <ContactForm />
       <Footer />
     </main>
   );

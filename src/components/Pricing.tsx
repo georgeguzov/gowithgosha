@@ -107,7 +107,7 @@ export default function Pricing() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest mb-1">Даты</p>
-                  <p className="text-xl font-bold text-[#f5f0e8]">3–11 октября 2026</p>
+                  <p className="text-xl font-bold text-[#f5f0e8]">10–18 октября 2026</p>
                 </div>
                 <div className="text-4xl">🗓️</div>
               </div>

@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-[#f5f0e8]/40 text-center">
             <span>Чэнду + Чунцин</span>
             <span className="hidden sm:inline">·</span>
-            <span>3–11 октября 2026</span>
+            <span>10–18 октября 2026</span>
             <span className="hidden sm:inline">·</span>
           </div>
 

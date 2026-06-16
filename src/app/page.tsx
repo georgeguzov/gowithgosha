@@ -10,7 +10,7 @@ const trips = [
     country: "Китай",
     title: "Панды и Киберпанк",
     subtitle: "Чэнду + Чунцин",
-    dates: "3–11 октября 2026",
+    dates: "10–18 октября 2026",
     duration: "9 дней",
     price: "$1 390",
     image: "/ченду-панда-1.jpg",

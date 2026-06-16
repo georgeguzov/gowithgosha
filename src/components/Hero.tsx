@@ -74,7 +74,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 glass-red rounded-full px-4 py-2 text-sm mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-[#c8102e] animate-pulse" />
-          <span className="text-[#f5f0e8]/80">Авторский тур · 3–11 октября 2026</span>
+          <span className="text-[#f5f0e8]/80">Авторский тур · 10–18 октября 2026</span>
         </motion.div>
 
         {/* Main heading */}
