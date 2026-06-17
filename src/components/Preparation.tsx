@@ -305,6 +305,76 @@ function AppsContent() {
   );
 }
 
+function VisaContent() {
+  return (
+    <div className="space-y-6">
+
+      {/* BY + RU */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          { flag: "🇧🇾", country: "Граждане Беларуси", text: "Виза не нужна. Можно находиться в Китае до 30 дней без оформления визы заранее." },
+          { flag: "🇷🇺", country: "Граждане России", text: "Виза не нужна для туристических поездок при пребывании до 30 дней." },
+        ].map((item, i) => (
+          <div key={i} className="glass rounded-2xl p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-2xl">{item.flag}</span>
+              <h4 className="text-sm font-semibold text-[#f5f0e8]">{item.country}</h4>
+            </div>
+            <p className="text-sm text-[#f5f0e8]/60 leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* What's needed at border */}
+      <div>
+        <h4 className="text-sm font-semibold text-[#f5f0e8]/50 uppercase tracking-widest mb-3">🛂 Что понадобится на границе</h4>
+        <div className="space-y-2">
+          {[
+            "Загранпаспорт",
+            "Адрес проживания или бронь отеля",
+            "Обратный билет или билет в следующую страну",
+            "Информация о маршруте поездки",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 text-sm text-[#f5f0e8]/70">
+              <span className="text-[#d4a843] mt-0.5 shrink-0">·</span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-[#f5f0e8]/50 leading-relaxed">
+          Проверка обычно проходит быстро, но лучше иметь все документы под рукой.
+          Для участников тура я заранее предоставлю всю необходимую информацию по отелям, маршруту и бронированиям.
+        </p>
+      </div>
+
+      {/* Arrival card */}
+      <div>
+        <h4 className="text-sm font-semibold text-[#f5f0e8]/50 uppercase tracking-widest mb-3">✍️ Иммиграционная карта</h4>
+        <p className="text-sm text-[#f5f0e8]/60 leading-relaxed mb-3">
+          Во время перелёта или по прилёте может потребоваться заполнить карту прибытия. Обычно нужно указать:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+          {["ФИО", "Номер паспорта", "Номер рейса", "Адрес проживания в Китае", "Цель поездки"].map((f, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm text-[#f5f0e8]/60">
+              <span className="text-[#d4a843] shrink-0">·</span> {f}
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 text-sm text-[#f5f0e8]/40">Заполнение занимает несколько минут.</p>
+      </div>
+
+      {/* Don't worry */}
+      <div className="glass-red rounded-2xl p-5 text-sm text-[#f5f0e8]/70 leading-relaxed">
+        <p className="font-semibold text-[#d4a843] mb-2">💡 Не переживайте</p>
+        <p>
+          Если вы едете со мной в тур, я заранее пришлю подробную инструкцию по въезду в Китай,
+          помогу проверить документы и отвечу на все вопросы до вылета.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function ComingSoonContent({ title }: { title: string }) {
   return (
     <div className="text-center py-6">
@@ -338,7 +408,8 @@ const cards: Card[] = [
   {
     icon: "🛂",
     title: "Виза",
-    ready: false,
+    ready: true,
+    content: <VisaContent />,
   },
 ];
 
