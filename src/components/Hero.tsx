@@ -108,7 +108,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <a
-            href="#booking"
+            href="#contact"
             className="group relative px-8 py-4 bg-[#c8102e] rounded-full text-white font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
           >
             <span className="relative z-10">Хочу в тур</span>

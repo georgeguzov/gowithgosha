@@ -133,9 +133,7 @@ export default function Pricing() {
           className="text-center"
         >
           <a
-            href="https://t.me/idonthavenick"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
             className="group relative inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#c8102e] rounded-full text-white font-semibold text-lg md:text-xl overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
           >
             <span className="relative z-10">Записаться в тур</span>
