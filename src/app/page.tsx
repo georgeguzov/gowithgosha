@@ -88,9 +88,10 @@ export default function HomePage() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-[#c8102e] text-xs font-semibold uppercase tracking-[0.3em] mb-3"
+              className="text-xs font-semibold uppercase tracking-[0.3em] mb-3"
             >
-              Go With Gosha · Авторские путешествия
+              <span className="text-[#f5f0e8]">Go With Gosha</span>
+              <span className="text-[#c8102e]"> · Авторские путешествия</span>
             </motion.p>
 
             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
@@ -99,7 +100,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-[#f5f0e8]/55 text-lg leading-relaxed mb-8">
-              Небольшие группы, продуманные маршруты и люди, с которыми хочется путешествовать снова.
+              Новые страны. Новые впечатления. Новые люди, которые становятся друзьями и с которыми хочется увидеть ещё полмира.
             </p>
 
             {/* Social links */}
@@ -239,7 +240,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Туры ── */}
-      <section className="relative z-10 py-16 px-6">
+      <section id="tours" className="relative z-10 py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ y: 16 }}
