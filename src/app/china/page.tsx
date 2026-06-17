@@ -7,6 +7,7 @@ import Program from "@/components/Program";
 import TripMap from "@/components/TripMap";
 import Guide from "@/components/Guide";
 import Pricing from "@/components/Pricing";
+import Preparation from "@/components/Preparation";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -37,6 +38,7 @@ export default function ChinaPage() {
       <TripMap />
       <Guide />
       <Pricing />
+      <Preparation />
       <FAQ />
       <ContactForm />
       <Footer />
