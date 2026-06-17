@@ -95,6 +95,86 @@ function ESIMContent() {
   );
 }
 
+function AlipayContent() {
+  return (
+    <div className="space-y-6">
+      <p className="text-[#f5f0e8]/70 leading-relaxed">
+        В Китае наличные используются всё реже. Большинство покупок — от метро и кофе до ресторанов
+        и магазинов — оплачиваются через{" "}
+        <span className="text-[#d4a843] font-medium">Alipay</span>.
+      </p>
+
+      {/* How to prepare */}
+      <div>
+        <h4 className="text-sm font-semibold text-[#f5f0e8]/50 uppercase tracking-widest mb-3">Как подготовиться</h4>
+        <div className="space-y-3">
+          {[
+            "Скачайте приложение Alipay до поездки.",
+            "Зарегистрируйтесь по номеру телефона.",
+            "Привяжите свою банковскую карту Visa или Mastercard.",
+            "Убедитесь, что карта успешно добавлена в приложение.",
+          ].map((step, i) => (
+            <div key={i} className="flex items-start gap-3 text-sm text-[#f5f0e8]/70">
+              <span className="shrink-0 w-6 h-6 rounded-full bg-[#c8102e]/20 border border-[#c8102e]/30 text-[#c8102e] text-xs font-bold flex items-center justify-center">
+                {i + 1}
+              </span>
+              <span className="mt-0.5">{step}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* How to pay */}
+      <div>
+        <h4 className="text-sm font-semibold text-[#f5f0e8]/50 uppercase tracking-widest mb-3">Как платить</h4>
+        <p className="text-sm text-[#f5f0e8]/70 leading-relaxed">
+          После привязки карты достаточно открыть раздел{" "}
+          <span className="text-[#f5f0e8] font-medium">Pay / Scan</span> и отсканировать QR-код продавца
+          или показать свой QR-код для оплаты.
+        </p>
+      </div>
+
+      {/* What can be paid */}
+      <div>
+        <h4 className="text-sm font-semibold text-[#f5f0e8]/50 uppercase tracking-widest mb-3">Что можно оплачивать</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {[
+            "Кафе и рестораны",
+            "Магазины и супермаркеты",
+            "Метро и общественный транспорт",
+            "Такси",
+            "Достопримечательности",
+            "Вендинговые автоматы",
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 text-sm text-[#f5f0e8]/70">
+              <span className="text-[#d4a843] shrink-0">✓</span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tip */}
+      <div className="glass-red rounded-2xl p-5 text-sm text-[#f5f0e8]/70 leading-relaxed">
+        <p>
+          <span className="text-[#d4a843] font-semibold">Полезный совет:</span> настройте Alipay ещё
+          дома до вылета. После прилёта вы сможете пользоваться оплатой практически сразу и не
+          переживать из-за обмена наличных.
+        </p>
+      </div>
+
+      {/* Personal note */}
+      <div className="flex items-start gap-3 text-sm text-[#f5f0e8]/50 italic">
+        <span className="text-lg shrink-0">💡</span>
+        <span>
+          Лично я использую Alipay во всех поездках по Китаю. Для большинства путешественников
+          этого приложения достаточно практически на 100% поездки.
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function ComingSoonContent({ title }: { title: string }) {
   return (
     <div className="text-center py-6">
@@ -116,7 +196,8 @@ const cards: Card[] = [
   {
     icon: "💳",
     title: "Оплата в Китае",
-    ready: false,
+    ready: true,
+    content: <AlipayContent />,
   },
   {
     icon: "🚄",
