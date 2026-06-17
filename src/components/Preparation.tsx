@@ -175,6 +175,136 @@ function AlipayContent() {
   );
 }
 
+function AppsContent() {
+  return (
+    <div className="space-y-6">
+      <p className="text-[#f5f0e8]/70 leading-relaxed">
+        Перед поездкой рекомендую установить эти приложения. Сам использую именно их
+        во время путешествий по Китаю.
+      </p>
+
+      {/* Apps list */}
+      <div className="space-y-5">
+        {[
+          {
+            icon: "💳",
+            name: "Alipay",
+            desc: "Главное приложение для оплаты в Китае. Через него можно оплачивать практически всё: метро, такси, кафе, магазины и достопримечательности.",
+          },
+          {
+            icon: "💬",
+            name: "WeChat",
+            desc: "Самый популярный мессенджер в Китае. Многие местные общаются только через него — пригодится для связи с отелями, гидами и новыми знакомыми.",
+          },
+          {
+            icon: "🚇",
+            name: "MetroMan",
+            desc: "Лучшее приложение для метро в Китае. Показывает схемы, маршруты, пересадки и стоимость поездок во всех крупных городах.",
+          },
+          {
+            icon: "✈️",
+            name: "Trip.com",
+            desc: "Для бронирования отелей, поездов и внутренних перелётов. Одно из самых удобных приложений для путешествий по Китаю.",
+          },
+        ].map((app, i) => (
+          <div key={i} className="flex items-start gap-4">
+            <div className="shrink-0 w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-xl">
+              {app.icon}
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-[#f5f0e8] mb-1">{app.name}</h4>
+              <p className="text-sm text-[#f5f0e8]/60 leading-relaxed">{app.desc}</p>
+            </div>
+          </div>
+        ))}
+
+        {/* Maps — special */}
+        <div className="flex items-start gap-4">
+          <div className="shrink-0 w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-xl">
+            🗺️
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-[#f5f0e8] mb-1">Карты</h4>
+            <p className="text-sm text-[#f5f0e8]/60 leading-relaxed">
+              <span className="text-[#f5f0e8]/80 font-medium">Maps.me</span> — основной выбор для пеших прогулок и навигации.
+              Рекомендую заранее скачать карты нужных городов.
+            </p>
+            <p className="text-sm text-[#f5f0e8]/60 leading-relaxed mt-1">
+              Если у вас iPhone — также рекомендую <span className="text-[#f5f0e8]/80 font-medium">Apple Maps</span>.
+              В Китае они работают очень хорошо и часто точнее привычных карт.
+            </p>
+          </div>
+        </div>
+
+        {/* ChatGPT */}
+        <div className="flex items-start gap-4">
+          <div className="shrink-0 w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-xl">
+            🤖
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-[#f5f0e8] mb-1">ChatGPT или DeepSeek</h4>
+            <p className="text-sm text-[#f5f0e8]/60 leading-relaxed mb-2">
+              Для перевода и общения с местными — намного лучше понимают контекст, чем классические переводчики.
+            </p>
+            <div className="grid grid-cols-2 gap-1.5">
+              {["перевод меню", "общение с местными", "расшифровка вывесок", "нестандартные ситуации"].map((u, i) => (
+                <div key={i} className="flex items-center gap-2 text-xs text-[#f5f0e8]/50">
+                  <span className="text-[#d4a843]">·</span> {u}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* VPN */}
+      <div className="glass rounded-2xl p-5 space-y-3">
+        <h4 className="text-sm font-semibold text-[#f5f0e8] flex items-center gap-2">
+          <span>🌐</span> VPN
+        </h4>
+        <p className="text-sm text-[#f5f0e8]/60 leading-relaxed">
+          В Китае многие привычные сервисы работают с ограничениями при использовании местного Wi-Fi или SIM-карты:
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {["Instagram", "Telegram", "WhatsApp", "YouTube", "Gmail", "Google"].map((s, i) => (
+            <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/[0.07] text-[#f5f0e8]/50">
+              {s}
+            </span>
+          ))}
+        </div>
+        <p className="text-sm text-[#f5f0e8]/60 leading-relaxed">
+          Если планируете пользоваться местным Wi-Fi — рекомендую установить VPN ещё до вылета и проверить его работу заранее.
+        </p>
+      </div>
+
+      {/* eSIM note */}
+      <div className="glass-red rounded-2xl p-5 text-sm text-[#f5f0e8]/70 leading-relaxed space-y-2">
+        <p className="font-semibold text-[#d4a843]">💡 Важный момент про eSIM</p>
+        <p>
+          Если вы используете международную eSIM через Trip.com, Instagram, Telegram, WhatsApp, YouTube и Gmail
+          чаще всего работают{" "}
+          <span className="text-[#f5f0e8]/90 font-medium">без дополнительного VPN</span>.
+        </p>
+      </div>
+
+      {/* My kit */}
+      <div className="border border-white/[0.07] rounded-2xl p-5">
+        <h4 className="text-sm font-semibold text-[#f5f0e8]/50 uppercase tracking-widest mb-3">🎒 Мой набор для Китая</h4>
+        <div className="flex flex-wrap gap-2">
+          {["Alipay", "WeChat", "MetroMan", "Trip.com", "Maps.me", "ChatGPT", "eSIM"].map((app, i) => (
+            <span key={i} className="text-xs px-3 py-1.5 rounded-full bg-[#c8102e]/10 border border-[#c8102e]/20 text-[#f5f0e8]/70 font-medium">
+              {app}
+            </span>
+          ))}
+        </div>
+        <p className="mt-3 text-xs text-[#f5f0e8]/40">
+          С этой связкой вы будете готовы практически к любой ситуации во время путешествия.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function ComingSoonContent({ title }: { title: string }) {
   return (
     <div className="text-center py-6">
@@ -200,14 +330,10 @@ const cards: Card[] = [
     content: <AlipayContent />,
   },
   {
-    icon: "🚄",
-    title: "Транспорт",
-    ready: false,
-  },
-  {
     icon: "📲",
     title: "Полезные приложения",
-    ready: false,
+    ready: true,
+    content: <AppsContent />,
   },
   {
     icon: "🛂",
