@@ -85,7 +85,7 @@ export default function Guide() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Ваш гид</p>
+            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Турлидер</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               Гоша <span className="gradient-text">Гузов</span>
             </h2>
