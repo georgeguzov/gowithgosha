@@ -12,7 +12,7 @@ const trips = [
     subtitle: "Чэнду + Чунцин",
     dates: "10–18 октября 2026",
     duration: "9 дней",
-    price: "$1 390",
+    price: "$1 490",
     image: "/ченду-панда-1.jpg",
     tags: ["Панды", "Киберпанк", "Хот-пот", "Небольшая группа"],
     status: "open" as const,
