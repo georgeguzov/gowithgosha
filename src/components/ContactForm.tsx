@@ -24,6 +24,9 @@ export default function ContactForm() {
 
       if (!res.ok) throw new Error();
       setState("success");
+      if (typeof window !== "undefined" && (window as unknown as { fbq?: (...a: unknown[]) => void }).fbq) {
+        (window as unknown as { fbq: (...a: unknown[]) => void }).fbq("track", "Lead");
+      }
     } catch {
       setState("error");
     }
