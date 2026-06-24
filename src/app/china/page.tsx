@@ -37,9 +37,9 @@ export default function ChinaPage() {
       <Program />
       <TripMap />
       <Pricing />
-      <Preparation />
       <FAQ />
       <ContactForm />
+      <Preparation />
       <Guide />
       <Footer />
     </main>
