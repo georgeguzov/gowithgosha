@@ -1,35 +1,58 @@
 "use client";
 
-const items = [
-  "🐼 Центр панд",
-  "🌶️ Сычуаньский хот-пот",
-  "🏙️ Киберпанк Чунцин",
-  "🎭 Шоу смены лиц",
-  "🚄 Скоростной поезд",
-  "🏮 Hongyadong",
-  "🌊 Бирюзовая вода",
-  "🎪 3D-экраны",
-  "🌃 Ночные улицы",
-  "🧋 Чайные парки",
-  "🎬 Природные мосты",
-  "👘 Китайские костюмы",
-];
+import { motion } from "framer-motion";
 
 export default function Ticker() {
-  const doubled = [...items, ...items];
-
   return (
-    <div className="relative py-5 overflow-hidden border-y border-white/10 bg-[#c8102e]/5">
-      <div className="flex animate-marquee whitespace-nowrap">
-        {doubled.map((item, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-2 mx-6 text-sm font-medium text-[#f5f0e8]/70 uppercase tracking-widest"
-          >
-            {item}
-            <span className="text-[#c8102e] mx-2">·</span>
-          </span>
-        ))}
+    <div className="relative py-10 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_100%_at_50%_50%,rgba(200,16,46,0.07),transparent)] pointer-events-none" />
+
+      <div className="relative flex items-center justify-center gap-0 px-8 max-w-2xl mx-auto">
+        {/* Left decorative line */}
+        <div className="flex items-center flex-1 gap-3">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#c8102e]/50" />
+          <motion.span
+            animate={{ opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+            className="text-[#c8102e]/50 text-xs select-none"
+          >✦</motion.span>
+          <motion.span
+            animate={{ opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="text-[#c8102e]/30 text-[10px] select-none"
+          >✦</motion.span>
+        </div>
+
+        {/* Dragon */}
+        <motion.div
+          animate={{
+            y: [0, -7, 0],
+            filter: [
+              "drop-shadow(0 0 6px rgba(200,16,46,0.35))",
+              "drop-shadow(0 0 22px rgba(200,16,46,0.75)) drop-shadow(0 0 40px rgba(212,168,67,0.2))",
+              "drop-shadow(0 0 6px rgba(200,16,46,0.35))",
+            ],
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          className="text-5xl md:text-6xl select-none shrink-0 mx-5"
+        >
+          🐉
+        </motion.div>
+
+        {/* Right decorative line */}
+        <div className="flex items-center flex-1 gap-3">
+          <motion.span
+            animate={{ opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="text-[#c8102e]/30 text-[10px] select-none"
+          >✦</motion.span>
+          <motion.span
+            animate={{ opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+            className="text-[#c8102e]/50 text-xs select-none"
+          >✦</motion.span>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#c8102e]/50" />
+        </div>
       </div>
     </div>
   );

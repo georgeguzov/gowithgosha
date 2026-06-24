@@ -32,8 +32,8 @@ export default function Pricing() {
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 40 }}
+          animate={inView ? { y: 0 } : {}}
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
@@ -52,8 +52,8 @@ export default function Pricing() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {/* Included */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={{ y: 30 }}
+            animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass rounded-3xl p-8"
           >
@@ -64,8 +64,8 @@ export default function Pricing() {
               {included.map((item, i) => (
                 <motion.li
                   key={i}
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ x: -10 }}
+                  animate={inView ? { x: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.06, duration: 0.4 }}
                   className="flex items-start gap-3 text-sm text-[#f5f0e8]/70"
                 >
@@ -79,8 +79,8 @@ export default function Pricing() {
           {/* Not included + CTA */}
           <div className="space-y-6">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 30 }}
+              animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="glass rounded-3xl p-8"
             >
@@ -99,8 +99,8 @@ export default function Pricing() {
 
             {/* Dates + spots */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 30 }}
+              animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="glass-red rounded-3xl p-6 space-y-4"
             >
@@ -127,8 +127,8 @@ export default function Pricing() {
 
         {/* CTA button */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 30 }}
+          animate={inView ? { y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
           className="text-center"
         >

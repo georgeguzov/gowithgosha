@@ -22,9 +22,9 @@ export default function Guide() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left — Avatar & flags */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ y: 24 }}
+            animate={inView ? { y: 0 } : {}}
+            transition={{ duration: 0.7 }}
             className="relative"
           >
             {/* Avatar placeholder */}
@@ -58,32 +58,19 @@ export default function Guide() {
             </div>
 
             {/* Country flags */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="mt-8 flex flex-wrap gap-2 justify-center lg:justify-start"
-            >
+            <div className="mt-8 flex flex-wrap gap-2 justify-center lg:justify-start">
               {countries.map((flag, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ scale: 0 }}
-                  animate={inView ? { scale: 1 } : {}}
-                  transition={{ delay: 0.5 + i * 0.03, type: "spring", stiffness: 200 }}
-                  className="text-2xl"
-                >
-                  {flag}
-                </motion.span>
+                <span key={i} className="text-2xl">{flag}</span>
               ))}
               <span className="text-sm text-[#f5f0e8]/30 self-center ml-1">и ещё 20+</span>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Right — Text */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ y: 24 }}
+            animate={inView ? { y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
           >
             <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Турлидер</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">

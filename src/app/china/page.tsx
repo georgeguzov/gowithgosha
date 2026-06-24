@@ -36,11 +36,11 @@ export default function ChinaPage() {
       <Gallery />
       <Program />
       <TripMap />
-      <Guide />
       <Pricing />
       <Preparation />
       <FAQ />
       <ContactForm />
+      <Guide />
       <Footer />
     </main>
   );

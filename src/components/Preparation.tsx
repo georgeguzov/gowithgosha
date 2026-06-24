@@ -426,8 +426,8 @@ export default function Preparation() {
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 20 }}
+          animate={inView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-4"
         >
@@ -447,8 +447,8 @@ export default function Preparation() {
             {cards.map((card, i) => (
               <motion.button
                 key={i}
-                initial={{ opacity: 0, x: -16 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
+                initial={{ x: -12 }}
+                animate={inView ? { x: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className={`group shrink-0 lg:w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left transition-all duration-300 border ${
@@ -476,7 +476,7 @@ export default function Preparation() {
             {openIndex !== null && (
               <motion.div
                 key={openIndex}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3 }}

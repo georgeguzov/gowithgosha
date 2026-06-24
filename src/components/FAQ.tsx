@@ -43,8 +43,8 @@ export default function FAQ() {
     <section ref={ref} className="relative py-24 px-6">
       <div className="max-w-3xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 40 }}
+          animate={inView ? { y: 0 } : {}}
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
@@ -58,8 +58,8 @@ export default function FAQ() {
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 20 }}
+              animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.07 }}
               className="glass rounded-2xl overflow-hidden"
             >
@@ -96,8 +96,8 @@ export default function FAQ() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 20 }}
+          animate={inView ? { y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-10 text-center glass rounded-2xl px-8 py-7"
         >

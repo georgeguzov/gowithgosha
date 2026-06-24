@@ -4,14 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
-const floatingEmojis = [
-  { emoji: "🐼", x: "8%",  delay: 0,   size: "text-4xl" },
-  { emoji: "🏮", x: "82%", delay: 0.5, size: "text-3xl" },
-  { emoji: "🌃", x: "68%", delay: 1,   size: "text-2xl" },
-  { emoji: "🍜", x: "18%", delay: 1.5, size: "text-3xl" },
-  { emoji: "🏔️", x: "85%", delay: 0.8, size: "text-2xl" },
-  { emoji: "🎭", x: "5%",  delay: 1.2, size: "text-2xl" },
-];
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -44,26 +36,9 @@ export default function Hero() {
         }}
       />
 
-      {/* Floating emojis */}
-      {floatingEmojis.map((item, i) => (
-        <motion.div
-          key={i}
-          className={`absolute ${item.size} select-none pointer-events-none`}
-          style={{ left: item.x, top: `${15 + i * 12}%` }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 0.6, y: [0, -14, 0] }}
-          transition={{
-            opacity: { delay: item.delay + 0.5, duration: 0.8 },
-            y: { delay: item.delay, duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
-          }}
-        >
-          {item.emoji}
-        </motion.div>
-      ))}
-
-{/* Content */}
+      {/* Content */}
       <motion.div
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 md:pt-0"
         style={{ y, opacity }}
       >
         {/* Badge */}
