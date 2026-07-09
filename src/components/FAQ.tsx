@@ -104,7 +104,7 @@ export default function FAQ() {
           <p className="text-[#f5f0e8]/80 text-sm leading-relaxed">
             Остались вопросы?{" "}
             <a
-              href="https://t.me/idonthavenick"
+              href="https://t.me/g_zov"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#c8102e] hover:text-[#e8102e] transition-colors duration-200 underline underline-offset-2"

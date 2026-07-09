@@ -106,7 +106,7 @@ export default function HomePage() {
             {/* Social links */}
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <a
-                href="https://t.me/idonthavenick"
+                href="https://t.me/g_zov"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-all duration-300"
@@ -389,7 +389,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://t.me/idonthavenick"
+                href="https://t.me/g_zov"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative px-8 py-4 bg-[#c8102e] rounded-full text-white font-semibold text-base overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
@@ -417,7 +417,7 @@ export default function HomePage() {
             <span>· Авторские путешествия</span>
           </div>
           <div className="flex gap-5">
-            <a href="https://t.me/idonthavenick" target="_blank" rel="noopener noreferrer" className="hover:text-[#f5f0e8]/60 transition-colors">Telegram</a>
+            <a href="https://t.me/g_zov" target="_blank" rel="noopener noreferrer" className="hover:text-[#f5f0e8]/60 transition-colors">Telegram</a>
             <a href="https://instagram.com/gowithgosha" target="_blank" rel="noopener noreferrer" className="hover:text-[#f5f0e8]/60 transition-colors">Instagram</a>
           </div>
         </div>

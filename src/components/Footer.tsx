@@ -20,7 +20,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-3">
             <a
-              href="https://t.me/idonthavenick"
+              href="https://t.me/g_zov"
               target="_blank"
               rel="noopener noreferrer"
               className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white hover:border-[#c8102e]/30 transition-all duration-300"

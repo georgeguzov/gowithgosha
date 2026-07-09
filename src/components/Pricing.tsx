@@ -150,12 +150,12 @@ export default function Pricing() {
               @gowithgosha 📸
             </a>
             <a
-              href="https://t.me/idonthavenick"
+              href="https://t.me/g_zov"
               target="_blank"
               rel="noopener noreferrer"
               className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-all duration-300"
             >
-              @idonthavenick 💬
+              @g_zov 💬
             </a>
           </div>
           <p className="mt-3 text-sm text-[#f5f0e8]/40">

@@ -124,8 +124,8 @@ export default function ContactForm() {
 
               <p className="text-center text-xs text-[#f5f0e8]/25">
                 Или напишите напрямую{" "}
-                <a href="https://t.me/idonthavenick" target="_blank" rel="noopener noreferrer" className="text-[#f5f0e8]/40 hover:text-[#f5f0e8]/60 transition-colors">
-                  @idonthavenick
+                <a href="https://t.me/g_zov" target="_blank" rel="noopener noreferrer" className="text-[#f5f0e8]/40 hover:text-[#f5f0e8]/60 transition-colors">
+                  @g_zov
                 </a>
               </p>
             </motion.form>
