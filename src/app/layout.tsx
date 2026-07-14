@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     siteName: "Go With Gosha",
     locale: "ru_RU",
     type: "website" as const,
-    images: [{ url: "/japan.jpeg", width: 766, height: 400 }],
+    images: [{ url: "/japan.jpg", width: 766, height: 400 }],
   },
   twitter: {
     card: "summary_large_image" as const,
     title: "Go With Gosha — авторские путешествия",
     description: "Небольшие авторские туры по миру от Гоши Гузова.",
-    images: ["/japan.jpeg"],
+    images: ["/japan.jpg"],
   },
 };
 
