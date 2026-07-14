@@ -20,11 +20,11 @@ const trips = [
   {
     slug: "japan",
     country: "Япония",
-    title: "Клены и Горнолыжка в Японии",
+    title: "Клёны и Горнолыжка в Японии",
     subtitle: "Токио + Киото + Горнолыжка",
     dates: "Ноябрь – декабрь 2026",
     duration: "—",
-    price: "Скоро",
+    price: "Уточняется",
     image: "/japan.jpg",
     tags: ["Храмы", "Мегаполис", "Горнолыжка", "Комьюнити"],
     status: "soon" as const,
@@ -36,7 +36,7 @@ const trips = [
     subtitle: "Бали + Ява + Комодо",
     dates: "Зима 2026",
     duration: "—",
-    price: "Скоро",
+    price: "Уточняется",
     image: "/индонезия.jpg",
     tags: ["Острова", "Джунгли", "Снорклинг", "Комьюнити"],
     status: "soon" as const,
@@ -63,7 +63,7 @@ const reviews = [
     role: "разработчик, Минск",
   },
   {
-    text: "Самое крутое в поездках с Гошей - это крутая атмосфера. Очень быстро начинаешь чувствовать себя частью компании, даже если никого не знаешь.",
+    text: "Самое крутое в поездках с Гошей — это крутая атмосфера. Очень быстро начинаешь чувствовать себя частью компании, даже если никого не знаешь.",
     author: "Артём",
     role: "менеджер, Брест",
   },
@@ -169,94 +169,12 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ── Это больше, чем тур ── */}
-      <section className="relative z-10 py-20 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_0%_50%,rgba(200,16,46,0.07),transparent)] pointer-events-none" />
-
-        <div className="relative max-w-5xl mx-auto">
-          <motion.div
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
-            viewport={vp}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Философия</p>
-            <h2 className="text-3xl md:text-5xl font-bold">
-              Это больше, чем <span className="gradient-text">тур</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            {/* Big quote */}
-            <motion.div
-              initial={{ y: 20 }}
-              whileInView={{ y: 0 }}
-              viewport={vp}
-              transition={{ duration: 0.55 }}
-              className="glass-red rounded-3xl p-8 md:p-10 flex flex-col justify-center"
-            >
-              <div className="text-5xl text-[#c8102e]/25 font-serif leading-none mb-4 select-none">"</div>
-              <p className="text-lg md:text-xl text-[#f5f0e8]/85 leading-relaxed">
-                Большинство туров заканчиваются в аэропорту.
-              </p>
-              <p className="mt-4 text-[#f5f0e8]/60 leading-relaxed">
-                Я создаю путешествия и комьюнити, в которых важны не только страны и маршруты, но и люди рядом.
-              </p>
-            </motion.div>
-
-            {/* Details */}
-            <div className="space-y-4">
-              {[
-                {
-                  icon: "🌍",
-                  text: "Моя цель — собирать открытых, вабовых и лёгких на подъём ребят с общими ценностями, которые любят приключения, новые знакомства и яркие впечатления.",
-                },
-                {
-                  icon: "🤝",
-                  text: "Чтобы после поездки вы увезли домой не только фотки, но и новых друзей, с которыми захотите путешествовать снова.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ y: 16 }}
-                  whileInView={{ y: 0 }}
-                  viewport={vp}
-                  transition={{ duration: 0.45, delay: i * 0.1 }}
-                  className="glass rounded-2xl p-6 flex gap-4 items-start"
-                >
-                  <span className="text-2xl shrink-0">{item.icon}</span>
-                  <p className="text-[#f5f0e8]/65 leading-relaxed">{item.text}</p>
-                </motion.div>
-              ))}
-
-              {/* Tags */}
-              <motion.div
-                initial={{ y: 16 }}
-                whileInView={{ y: 0 }}
-                viewport={vp}
-                transition={{ duration: 0.45, delay: 0.2 }}
-                className="glass rounded-2xl p-6"
-              >
-                <div className="flex flex-wrap gap-2">
-                  {["Небольшие группы", "Атмосфера", "Комьюнити", "Новые знакомства", "Авторские маршруты"].map((tag, i) => (
-                    <span key={i} className="text-xs px-3 py-1.5 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── Туры ── */}
       <section id="tours" className="relative z-10 py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ y: 16 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.5 }}
             className="flex items-baseline gap-4 mb-10"
@@ -266,18 +184,11 @@ export default function HomePage() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trips.map((trip, i) => (
-              <motion.div
-                key={trip.slug}
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                viewport={vp}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
-              >
-                <Link
-                  href={trip.status === "open" ? `/${trip.slug}` : "#"}
-                  className={`group block glass rounded-3xl overflow-hidden transition-all duration-300 ${trip.status === "open" ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`}
-                >
+            {trips.map((trip, i) => {
+              const isOpen = trip.status === "open";
+              const cardClassName = `group block glass rounded-3xl overflow-hidden transition-all duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
+              const cardContent = (
+                <>
                   <div className="relative h-52 overflow-hidden">
                     <Image
                       src={trip.image}
@@ -289,7 +200,7 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
 
                     <div className="absolute top-3 left-3">
-                      {trip.status === "open" ? (
+                      {isOpen ? (
                         <span className="glass-red text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
                           Набор открыт
@@ -323,7 +234,7 @@ export default function HomePage() {
                         <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
                         <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
                       </div>
-                      {trip.status === "open" ? (
+                      {isOpen ? (
                         <div className="glass-red px-4 py-2 rounded-full text-sm font-medium text-[#f5f0e8] group-hover:bg-[#c8102e]/20 transition-colors duration-300">
                           Подробнее →
                         </div>
@@ -334,9 +245,109 @@ export default function HomePage() {
                       )}
                     </div>
                   </div>
-                </Link>
+                </>
+              );
+
+              return (
+                <motion.div
+                  key={trip.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={vp}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                >
+                  {isOpen ? (
+                    <Link href={`/${trip.slug}`} className={cardClassName}>
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    <div className={cardClassName}>{cardContent}</div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Это больше, чем тур ── */}
+      <section className="relative z-10 py-20 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_0%_50%,rgba(200,16,46,0.07),transparent)] pointer-events-none" />
+
+        <div className="relative max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={vp}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Философия</p>
+            <h2 className="text-3xl md:text-5xl font-bold">
+              Это больше, чем <span className="gradient-text">тур</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* Big quote */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.55 }}
+              className="glass-red rounded-3xl p-8 md:p-10 flex flex-col justify-center"
+            >
+              <div className="text-5xl text-[#c8102e]/25 font-serif leading-none mb-4 select-none">"</div>
+              <p className="text-lg md:text-xl text-[#f5f0e8]/85 leading-relaxed">
+                Большинство туров заканчиваются в аэропорту.
+              </p>
+              <p className="mt-4 text-[#f5f0e8]/60 leading-relaxed">
+                Я создаю путешествия и комьюнити, в которых важны не только страны и маршруты, но и люди рядом.
+              </p>
+            </motion.div>
+
+            {/* Details */}
+            <div className="space-y-4">
+              {[
+                {
+                  icon: "🌍",
+                  text: "Моя цель — собирать открытых, вабовых и лёгких на подъём ребят с общими ценностями, которые любят приключения, новые знакомства и яркие впечатления.",
+                },
+                {
+                  icon: "🤝",
+                  text: "Чтобы после поездки вы увезли домой не только фотки, но и новых друзей, с которыми захотите путешествовать снова.",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={vp}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                  className="glass rounded-2xl p-6 flex gap-4 items-start"
+                >
+                  <span className="text-2xl shrink-0">{item.icon}</span>
+                  <p className="text-[#f5f0e8]/65 leading-relaxed">{item.text}</p>
+                </motion.div>
+              ))}
+
+              {/* Tags */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={vp}
+                transition={{ duration: 0.45, delay: 0.2 }}
+                className="glass rounded-2xl p-6"
+              >
+                <div className="flex flex-wrap gap-2">
+                  {["Небольшие группы", "Атмосфера", "Комьюнити", "Новые знакомства", "Авторские маршруты"].map((tag, i) => (
+                    <span key={i} className="text-xs px-3 py-1.5 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -347,8 +358,8 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto">
           <motion.div
-            initial={{ y: 16 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
@@ -363,8 +374,8 @@ export default function HomePage() {
             {reviews.map((r, i) => (
               <motion.div
                 key={i}
-                initial={{ y: 16 }}
-                whileInView={{ y: 0 }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={vp}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/20 transition-all duration-300 hover:-translate-y-0.5"
@@ -385,8 +396,8 @@ export default function HomePage() {
       <section className="relative z-10 py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.6 }}
             className="glass-red rounded-3xl px-8 py-14 md:px-14 text-center"
