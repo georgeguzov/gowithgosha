@@ -18,6 +18,18 @@ const trips = [
     status: "open" as const,
   },
   {
+    slug: "japan",
+    country: "Япония",
+    title: "Осень в Японии",
+    subtitle: "Токио + Киото + Горнолыжка",
+    dates: "Ноябрь – декабрь 2026",
+    duration: "—",
+    price: "Скоро",
+    image: "/japan.jpeg",
+    tags: ["Храмы", "Мегаполис", "Горнолыжка", "Комьюнити"],
+    status: "soon" as const,
+  },
+  {
     slug: "indonesia",
     country: "Индонезия",
     title: "Неизведанная Индонезия",

@@ -1,8 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
-
-export default function Footer() {
+export default function Footer({ route, dates }: { route: string; dates: string }) {
   return (
     <footer className="relative border-t border-white/[0.06] py-12 px-6">
       <div className="max-w-6xl mx-auto">
@@ -12,9 +8,9 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-[#f5f0e8]/40 text-center">
-            <span>Чэнду + Чунцин</span>
+            <span>{route}</span>
             <span className="hidden sm:inline">·</span>
-            <span>10–18 октября 2026</span>
+            <span>{dates}</span>
             <span className="hidden sm:inline">·</span>
           </div>
 

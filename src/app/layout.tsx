@@ -9,11 +9,23 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Авторский тур в Китай — Гоша Гузов",
-  description: "Панды, киберпанк и настоящий Китай. Чэнду + Чунцин, 10–18 октября. Авторский тур от Гоши Гузова.",
+  metadataBase: new URL("https://gowithgosha.xyz"),
+  title: "Go With Gosha — авторские путешествия",
+  description: "Небольшие авторские туры по миру от Гоши Гузова: Китай, Япония, Индонезия и другие направления. Атмосфера, комьюнити и маршруты не из туристического автобуса.",
   openGraph: {
-    title: "Авторский тур в Китай — Гоша Гузов",
-    description: "Панды, киберпанк и настоящий Китай. Чэнду + Чунцин, 10–18 октября.",
+    title: "Go With Gosha — авторские путешествия",
+    description: "Небольшие авторские туры по миру от Гоши Гузова: Китай, Япония, Индонезия и другие направления.",
+    url: "https://gowithgosha.xyz",
+    siteName: "Go With Gosha",
+    locale: "ru_RU",
+    type: "website" as const,
+    images: [{ url: "/japan.jpeg", width: 766, height: 400 }],
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Go With Gosha — авторские путешествия",
+    description: "Небольшие авторские туры по миру от Гоши Гузова.",
+    images: ["/japan.jpeg"],
   },
 };
 

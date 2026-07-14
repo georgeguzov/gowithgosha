@@ -15,6 +15,12 @@ import Footer from "@/components/Footer";
 export const metadata = {
   title: "Панды и Киберпанк — Авторский тур в Китай",
   description: "Чэнду + Чунцин, 10–18 октября 2026. Авторский тур.",
+  openGraph: {
+    title: "Панды и Киберпанк — Авторский тур в Китай",
+    description: "Чэнду + Чунцин, 10–18 октября 2026. Авторский тур.",
+    url: "https://gowithgosha.xyz/china",
+    images: [{ url: "/ченду-панда-1.jpg", width: 720, height: 960 }],
+  },
 };
 
 export default function ChinaPage() {
@@ -41,7 +47,7 @@ export default function ChinaPage() {
       <ContactForm />
       <Preparation />
       <Guide />
-      <Footer />
+      <Footer route="Чэнду + Чунцин" dates="10–18 октября 2026" />
     </main>
   );
 }

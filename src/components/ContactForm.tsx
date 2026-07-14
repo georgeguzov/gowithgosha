@@ -9,6 +9,7 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [comment, setComment] = useState("");
+  const [website, setWebsite] = useState("");
   const [state, setState] = useState<State>("idle");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -19,7 +20,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, contact, comment }),
+        body: JSON.stringify({ name, contact, comment, website }),
       });
 
       if (!res.ok) throw new Error();
@@ -67,6 +68,16 @@ export default function ContactForm() {
               onSubmit={handleSubmit}
               className="glass rounded-3xl p-8 space-y-5"
             >
+              <input
+                type="text"
+                value={website}
+                onChange={e => setWebsite(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
+
               <div>
                 <label className="block text-xs text-[#f5f0e8]/40 uppercase tracking-widest mb-2">
                   Ваше имя *

@@ -1,5 +1,27 @@
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 3;
+const submissions = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (submissions.get(ip) ?? []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  timestamps.push(now);
+  submissions.set(ip, timestamps);
+  return timestamps.length > RATE_LIMIT_MAX;
+}
+
 export async function POST(request: Request) {
-  const { name, contact, comment } = await request.json();
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return Response.json({ error: "Too many requests" }, { status: 429 });
+  }
+
+  const { name, contact, comment, website } = await request.json();
+
+  // Honeypot: real users never fill this hidden field.
+  if (website?.trim()) {
+    return Response.json({ ok: true });
+  }
 
   if (!name?.trim() || !contact?.trim()) {
     return Response.json({ error: "Missing fields" }, { status: 400 });
