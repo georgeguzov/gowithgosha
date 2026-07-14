@@ -173,8 +173,8 @@ export default function HomePage() {
       <section id="tours" className="relative z-10 py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 16 }}
+            whileInView={{ y: 0 }}
             viewport={vp}
             transition={{ duration: 0.5 }}
             className="flex items-baseline gap-4 mb-10"
@@ -251,8 +251,8 @@ export default function HomePage() {
               return (
                 <motion.div
                   key={trip.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 20 }}
+                  whileInView={{ y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.45, delay: i * 0.1 }}
                 >
@@ -276,8 +276,8 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             viewport={vp}
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
@@ -291,8 +291,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
             {/* Big quote */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={vp}
               transition={{ duration: 0.55 }}
               className="glass-red rounded-3xl p-8 md:p-10 flex flex-col justify-center"
@@ -320,8 +320,8 @@ export default function HomePage() {
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 16 }}
+                  whileInView={{ y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.45, delay: i * 0.1 }}
                   className="glass rounded-2xl p-6 flex gap-4 items-start"
@@ -333,8 +333,8 @@ export default function HomePage() {
 
               {/* Tags */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 16 }}
+                whileInView={{ y: 0 }}
                 viewport={vp}
                 transition={{ duration: 0.45, delay: 0.2 }}
                 className="glass rounded-2xl p-6"
@@ -358,8 +358,8 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 16 }}
+            whileInView={{ y: 0 }}
             viewport={vp}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
@@ -374,8 +374,8 @@ export default function HomePage() {
             {reviews.map((r, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 16 }}
+                whileInView={{ y: 0 }}
                 viewport={vp}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/20 transition-all duration-300 hover:-translate-y-0.5"
@@ -396,8 +396,8 @@ export default function HomePage() {
       <section className="relative z-10 py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             viewport={vp}
             transition={{ duration: 0.6 }}
             className="glass-red rounded-3xl px-8 py-14 md:px-14 text-center"
