@@ -41,6 +41,18 @@ const trips = [
     tags: ["Острова", "Джунгли", "Снорклинг", "Комьюнити"],
     status: "soon" as const,
   },
+  {
+    slug: "australia",
+    country: "Австралия",
+    title: "Австралийское лето",
+    subtitle: "Сидней + Мельбурн",
+    dates: "Зима – весна 2027",
+    duration: "—",
+    price: "Уточняется",
+    image: "/австралия.jpg",
+    tags: ["Пляжи", "Мегаполисы", "Дикая природа", "Комьюнити"],
+    status: "soon" as const,
+  },
 ];
 
 const stats = [
@@ -73,10 +85,10 @@ const vp = { once: true, margin: "-60px" } as const;
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0f] text-[#f5f0e8]">
+    <main className="relative min-h-screen bg-[#0a0a0f] text-[#f5f0e8]">
 
-      {/* Fixed background gradients */}
-      <div className="fixed inset-0 pointer-events-none">
+      {/* Background gradients — sized to one viewport and anchored at the top, not viewport-fixed (avoids iOS Safari repainting a `position: fixed` layer on every toolbar show/hide) */}
+      <div className="absolute inset-x-0 top-0 h-screen pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(200,16,46,0.12),transparent)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_80%_80%,rgba(212,168,67,0.05),transparent)]" />
       </div>
@@ -186,7 +198,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, i) => {
               const isOpen = trip.status === "open";
-              const cardClassName = `group block glass rounded-3xl overflow-hidden transition-all duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
+              const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-all duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
               const cardContent = (
                 <>
                   <div className="relative h-52 overflow-hidden">
@@ -217,7 +229,7 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="p-5">
+                  <div className="p-5 flex-1 flex flex-col">
                     <h3 className="text-lg font-bold text-[#f5f0e8] mb-1">{trip.title}</h3>
                     <p className="text-sm text-[#f5f0e8]/50 mb-4">{trip.subtitle} · {trip.dates}</p>
 
@@ -229,7 +241,7 @@ export default function HomePage() {
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="mt-auto flex items-center justify-between">
                       <div>
                         <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
                         <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
