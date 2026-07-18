@@ -20,7 +20,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, contact, comment, website, tripLabel: "Клёны и Снег (Япония)" }),
+        body: JSON.stringify({ name, contact, comment, website, tripLabel: "От Огня к Снегу (Япония)" }),
       });
 
       if (!res.ok) throw new Error();

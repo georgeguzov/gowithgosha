@@ -58,8 +58,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight mb-6"
         >
-          <span className="block text-[#f5f0e8]">Клёны</span>
-          <span className="block gradient-text-japan">и Снег</span>
+          <span className="block text-[#f5f0e8]">От Огня</span>
+          <span className="block gradient-text-japan">к Снегу</span>
         </motion.h1>
 
         {/* Subtitle */}

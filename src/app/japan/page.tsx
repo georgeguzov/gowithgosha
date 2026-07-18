@@ -13,10 +13,10 @@ import ContactForm from "@/components/japan/ContactForm";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Клёны и Снег — Авторский тур в Японию",
+  title: "От Огня к Снегу — Авторский тур в Японию",
   description: "Токио + Киото + Нисэко, 22 ноября – 2 декабря 2026. Авторский тур.",
   openGraph: {
-    title: "Клёны и Снег — Авторский тур в Японию",
+    title: "От Огня к Снегу — Авторский тур в Японию",
     description: "Токио + Киото + Нисэко, 11 дней. Авторский тур.",
     url: "https://gowithgosha.xyz/japan",
     images: [{ url: "/клены-фудзи-обложка.jpg" }],

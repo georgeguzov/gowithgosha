@@ -20,7 +20,7 @@ const trips = [
   {
     slug: "japan",
     country: "Япония",
-    title: "Клёны и Снег",
+    title: "От Огня к Снегу",
     subtitle: "Токио + Киото + Нисэко",
     dates: "22 ноября – 2 декабря 2026",
     duration: "11 дней",

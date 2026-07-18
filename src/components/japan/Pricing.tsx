@@ -41,7 +41,7 @@ export default function Pricing() {
         >
           <p className="text-[#d9641f] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Стоимость</p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Клёны и Снег&nbsp;— <span className="gradient-text-japan">от $&thinsp;2&thinsp;890</span>
+            От Огня к Снегу&nbsp;— <span className="gradient-text-japan">от $&thinsp;2&thinsp;890</span>
           </h2>
           <p className="text-[#f5f0e8]/50 max-w-xl mx-auto">
             Маршрут, отели, трансферы и билеты внутри Японии уже продуманы. Вам остаётся долететь до Токио и наслаждаться поездкой.
