@@ -201,15 +201,17 @@ export default function HomePage() {
               const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-all duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
               const cardContent = (
                 <>
-                  <div className="relative h-52 overflow-hidden">
-                    <Image
-                      src={trip.image}
-                      alt={trip.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
+                  <div className="relative h-52 shrink-0 overflow-hidden">
+                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                      <Image
+                        src={trip.image}
+                        alt={trip.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
+                    </div>
 
                     <div className="absolute top-3 left-3">
                       {isOpen ? (
