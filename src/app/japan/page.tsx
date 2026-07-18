@@ -30,7 +30,7 @@ export default function JapanPage() {
       <div className="fixed top-5 left-5 z-50">
         <Link
           href="/"
-          className="flex items-center gap-2 glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-all duration-300 backdrop-blur-sm"
+          className="flex items-center gap-2 glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-colors duration-300 backdrop-blur-sm"
         >
           ← Все туры
         </Link>

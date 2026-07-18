@@ -128,7 +128,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={state === "loading"}
-                className="w-full glass-amber py-4 rounded-xl font-semibold text-[#f5f0e8] hover:bg-[#d9641f]/20 transition-all duration-300 disabled:opacity-50"
+                className="w-full glass-amber py-4 rounded-xl font-semibold text-[#f5f0e8] hover:bg-[#d9641f]/20 transition-[background-color,opacity] duration-300 disabled:opacity-50"
               >
                 {state === "loading" ? "Отправляем..." : "Отправить заявку →"}
               </button>

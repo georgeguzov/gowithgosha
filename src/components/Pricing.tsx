@@ -134,7 +134,7 @@ export default function Pricing() {
         >
           <a
             href="#contact"
-            className="group relative inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#c8102e] rounded-full text-white font-semibold text-lg md:text-xl overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
+            className="group relative inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#c8102e] rounded-full text-white font-semibold text-lg md:text-xl overflow-hidden transition-transform duration-300 hover:scale-105 animate-pulse-glow"
           >
             <span className="relative z-10">Записаться в тур</span>
             <span className="relative z-10 text-2xl">🚀</span>
@@ -145,7 +145,7 @@ export default function Pricing() {
               href="https://instagram.com/gowithgosha"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-all duration-300"
+              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-colors duration-300"
             >
               @gowithgosha 📸
             </a>
@@ -153,7 +153,7 @@ export default function Pricing() {
               href="https://t.me/g_zov"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-all duration-300"
+              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-colors duration-300"
             >
               @g_zov 💬
             </a>

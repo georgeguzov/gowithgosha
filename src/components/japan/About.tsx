@@ -59,7 +59,7 @@ export default function About() {
               whileInView={{ y: 0 }}
               viewport={vp}
               transition={{ duration: 0.35, ease: "easeOut", delay: i * 0.04 }}
-              className="glass rounded-2xl p-6 group hover:border-[#d9641f]/30 transition-all duration-300 hover:-translate-y-1"
+              className="glass rounded-2xl p-6 group hover:border-[#d9641f]/30 transition-[border-color,transform] duration-300 hover:-translate-y-1"
             >
               <div className="text-3xl mb-3">{f.icon}</div>
               <h3 className="font-semibold text-[#f5f0e8] mb-2">{f.title}</h3>

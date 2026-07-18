@@ -19,7 +19,7 @@ export default function Footer({ route, dates }: { route: string; dates: string 
               href="https://t.me/g_zov"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white hover:border-[#c8102e]/30 transition-all duration-300"
+              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white hover:border-[#c8102e]/30 transition-colors duration-300"
             >
               Telegram 💬
             </a>
@@ -27,7 +27,7 @@ export default function Footer({ route, dates }: { route: string; dates: string 
               href="https://instagram.com/gowithgosha"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white hover:border-[#c8102e]/30 transition-all duration-300"
+              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white hover:border-[#c8102e]/30 transition-colors duration-300"
             >
               Instagram 📸
             </a>

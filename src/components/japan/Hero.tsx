@@ -83,14 +83,14 @@ export default function Hero() {
         >
           <a
             href="#contact"
-            className="group relative px-8 py-4 bg-[#d9641f] rounded-full text-white font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow-amber"
+            className="group relative px-8 py-4 bg-[#d9641f] rounded-full text-white font-semibold text-lg overflow-hidden transition-transform duration-300 hover:scale-105 animate-pulse-glow-amber"
           >
             <span className="relative z-10">Хочу в тур</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#d9641f] to-[#f0983f] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a
             href="#program"
-            className="px-8 py-4 glass rounded-full text-[#f5f0e8]/80 font-medium text-lg hover:text-white hover:border-white/20 transition-all duration-300"
+            className="px-8 py-4 glass rounded-full text-[#f5f0e8]/80 font-medium text-lg hover:text-white hover:border-white/20 transition-colors duration-300"
           >
             Смотреть программу ↓
           </a>

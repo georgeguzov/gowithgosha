@@ -41,7 +41,7 @@ export default function Pricing() {
         >
           <p className="text-[#d9641f] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Стоимость</p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-            От Огня к Снегу&nbsp;— <span className="gradient-text-japan">от $&thinsp;2&thinsp;890</span>
+            От Огня к Снегу&nbsp;— <span className="gradient-text-japan">от $&thinsp;2&thinsp;590</span>
           </h2>
           <p className="text-[#f5f0e8]/50 max-w-xl mx-auto">
             Маршрут, отели, трансферы и билеты внутри Японии уже продуманы. Вам остаётся долететь до Токио и наслаждаться поездкой.
@@ -136,7 +136,7 @@ export default function Pricing() {
         >
           <a
             href="#contact"
-            className="group relative inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#d9641f] rounded-full text-white font-semibold text-lg md:text-xl overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow-amber"
+            className="group relative inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#d9641f] rounded-full text-white font-semibold text-lg md:text-xl overflow-hidden transition-transform duration-300 hover:scale-105 animate-pulse-glow-amber"
           >
             <span className="relative z-10">Записаться в тур</span>
             <span className="relative z-10 text-2xl">🚀</span>
@@ -147,7 +147,7 @@ export default function Pricing() {
               href="https://instagram.com/gowithgosha"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-all duration-300"
+              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-colors duration-300"
             >
               @gowithgosha 📸
             </a>
@@ -155,7 +155,7 @@ export default function Pricing() {
               href="https://t.me/g_zov"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-all duration-300"
+              className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/60 hover:text-white transition-colors duration-300"
             >
               @g_zov 💬
             </a>

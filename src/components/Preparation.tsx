@@ -451,7 +451,7 @@ export default function Preparation() {
                 animate={inView ? { x: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className={`group shrink-0 lg:w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left transition-all duration-300 border ${
+                className={`group shrink-0 lg:w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left transition-colors duration-300 border ${
                   openIndex === i
                     ? "bg-[#c8102e]/10 border-[#c8102e]/30 text-[#f5f0e8]"
                     : "glass border-white/[0.06] text-[#f5f0e8]/60 hover:text-[#f5f0e8] hover:border-white/15"

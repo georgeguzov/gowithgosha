@@ -127,12 +127,12 @@ function DayCard({ d, open, onToggle }: {
       whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className={`day-card-japan glass rounded-2xl overflow-hidden cursor-pointer hover:border-white/15 transition-all duration-300 ${d.snow ? "is-snow" : ""}`}
+      className={`day-card-japan glass rounded-2xl overflow-hidden cursor-pointer hover:border-white/15 transition-colors duration-300 ${d.snow ? "is-snow" : ""}`}
       onClick={onToggle}
     >
       <div className="p-5 md:p-6 flex items-start gap-4">
         <div className="shrink-0">
-          <div className="day-number text-5xl md:text-6xl font-bold text-[#f5f0e8]/10 leading-none transition-all duration-300 select-none">
+          <div className="day-number text-5xl md:text-6xl font-bold text-[#f5f0e8]/10 leading-none transition-[color,text-shadow] duration-300 select-none">
             {String(d.day).padStart(2, "0")}
           </div>
         </div>

@@ -24,7 +24,7 @@ const trips = [
     subtitle: "Токио + Киото + Нисэко",
     dates: "22 ноября – 2 декабря 2026",
     duration: "11 дней",
-    price: "от $2 690",
+    price: "от $2 590",
     image: "/клены-фудзи-обложка.jpg",
     tags: ["Клёны", "Снег", "Фудзи", "Небольшая группа"],
     status: "open" as const,
@@ -133,7 +133,7 @@ export default function HomePage() {
                 href="https://t.me/g_zov"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-all duration-300"
+                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-colors duration-300"
               >
                 Telegram 💬
               </a>
@@ -141,7 +141,7 @@ export default function HomePage() {
                 href="https://instagram.com/gowithgosha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-all duration-300"
+                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-colors duration-300"
               >
                 Instagram 📸
               </a>
@@ -149,7 +149,7 @@ export default function HomePage() {
                 href="https://instagram.com/g.zov"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-all duration-300"
+                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-colors duration-300"
               >
                 @g.zov 📷
               </a>
@@ -198,7 +198,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, i) => {
               const isOpen = trip.status === "open";
-              const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-all duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
+              const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-[border-color,transform] duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
               const cardContent = (
                 <>
                   <div className="relative h-52 shrink-0 overflow-hidden">
@@ -392,7 +392,7 @@ export default function HomePage() {
                 whileInView={{ y: 0 }}
                 viewport={vp}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/20 transition-all duration-300 hover:-translate-y-0.5"
+                className="glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/20 transition-[border-color,transform] duration-300 hover:-translate-y-0.5"
               >
                 <div className="text-3xl text-[#c8102e]/20 font-serif leading-none select-none">"</div>
                 <p className="text-[#f5f0e8]/70 leading-relaxed text-sm flex-1">{r.text}</p>
@@ -429,7 +429,7 @@ export default function HomePage() {
                 href="https://t.me/g_zov"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-8 py-4 bg-[#c8102e] rounded-full text-white font-semibold text-base overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
+                className="group relative px-8 py-4 bg-[#c8102e] rounded-full text-white font-semibold text-base overflow-hidden transition-transform duration-300 hover:scale-105 animate-pulse-glow"
               >
                 <span className="relative z-10">Связаться со мной 💬</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#c8102e] to-[#ff3355] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -437,7 +437,7 @@ export default function HomePage() {
               <a
                 href="#tours"
                 onClick={(e) => { e.preventDefault(); document.querySelector("#tours")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="px-8 py-4 glass rounded-full text-[#f5f0e8]/75 font-medium text-base hover:text-white hover:border-white/20 transition-all duration-300"
+                className="px-8 py-4 glass rounded-full text-[#f5f0e8]/75 font-medium text-base hover:text-white hover:border-white/20 transition-colors duration-300"
               >
                 Посмотреть туры ↑
               </a>
