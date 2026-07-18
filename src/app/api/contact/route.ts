@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Too many requests" }, { status: 429 });
   }
 
-  const { name, contact, comment, website } = await request.json();
+  const { name, contact, comment, website, tripLabel } = await request.json();
 
   // Honeypot: real users never fill this hidden field.
   if (website?.trim()) {
@@ -27,8 +27,10 @@ export async function POST(request: Request) {
     return Response.json({ error: "Missing fields" }, { status: 400 });
   }
 
+  const trip = typeof tripLabel === "string" && tripLabel.trim() ? tripLabel.trim() : "Китай";
+
   const text = [
-    "🔔 <b>Новая заявка на тур в Китай!</b>",
+    `🔔 <b>Новая заявка на тур: ${trip}!</b>`,
     "",
     `👤 <b>Имя:</b> ${name.trim()}`,
     `📱 <b>Контакт:</b> ${contact.trim()}`,

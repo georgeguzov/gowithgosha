@@ -20,7 +20,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, contact, comment, website, tripLabel: "Китай" }),
+        body: JSON.stringify({ name, contact, comment, website, tripLabel: "Клёны и Снег (Япония)" }),
       });
 
       if (!res.ok) throw new Error();
@@ -35,13 +35,13 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="relative py-24 px-6">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(200,16,46,0.07),transparent)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_100%,rgba(217,100,31,0.07),transparent)] pointer-events-none" />
 
       <div className="relative z-10 max-w-xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Хочу в тур</p>
+          <p className="text-[#d9641f] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Хочу в тур</p>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            Оставьте <span className="gradient-text">заявку</span>
+            Оставьте <span className="gradient-text-japan">заявку</span>
           </h2>
           <p className="text-[#f5f0e8]/50 leading-relaxed">
             Напишите свои контакты — я свяжусь с вами в течение дня и отвечу на все вопросы.
@@ -54,7 +54,7 @@ export default function ContactForm() {
               key="success"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              className="glass-red rounded-3xl p-10 text-center"
+              className="glass-amber rounded-3xl p-10 text-center"
             >
               <div className="text-5xl mb-4">🎉</div>
               <h3 className="text-xl font-bold text-[#f5f0e8] mb-2">Заявка отправлена!</h3>
@@ -88,7 +88,7 @@ export default function ContactForm() {
                   onChange={e => setName(e.target.value)}
                   required
                   placeholder="Алексей"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#f5f0e8] placeholder-[#f5f0e8]/20 focus:outline-none focus:border-[#c8102e]/50 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#f5f0e8] placeholder-[#f5f0e8]/20 focus:outline-none focus:border-[#d9641f]/50 transition-colors"
                 />
               </div>
 
@@ -102,7 +102,7 @@ export default function ContactForm() {
                   onChange={e => setContact(e.target.value)}
                   required
                   placeholder="@username или +7 900 000-00-00"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#f5f0e8] placeholder-[#f5f0e8]/20 focus:outline-none focus:border-[#c8102e]/50 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#f5f0e8] placeholder-[#f5f0e8]/20 focus:outline-none focus:border-[#d9641f]/50 transition-colors"
                 />
               </div>
 
@@ -115,12 +115,12 @@ export default function ContactForm() {
                   onChange={e => setComment(e.target.value)}
                   rows={3}
                   placeholder="Есть вопросы? Напишите здесь..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#f5f0e8] placeholder-[#f5f0e8]/20 focus:outline-none focus:border-[#c8102e]/50 transition-colors resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#f5f0e8] placeholder-[#f5f0e8]/20 focus:outline-none focus:border-[#d9641f]/50 transition-colors resize-none"
                 />
               </div>
 
               {state === "error" && (
-                <p className="text-sm text-[#c8102e]/80">
+                <p className="text-sm text-[#d9641f]/80">
                   Что-то пошло не так. Попробуйте ещё раз или напишите напрямую в Telegram.
                 </p>
               )}
@@ -128,7 +128,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={state === "loading"}
-                className="w-full glass-red py-4 rounded-xl font-semibold text-[#f5f0e8] hover:bg-[#c8102e]/20 transition-all duration-300 disabled:opacity-50"
+                className="w-full glass-amber py-4 rounded-xl font-semibold text-[#f5f0e8] hover:bg-[#d9641f]/20 transition-all duration-300 disabled:opacity-50"
               >
                 {state === "loading" ? "Отправляем..." : "Отправить заявку →"}
               </button>

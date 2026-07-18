@@ -23,7 +23,7 @@
 }
 
 @media (max-width: 768px) {
-  .glass, .glass-red {
+  .glass, .glass-red, .glass-amber, .glass-ice {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -68,6 +68,11 @@ body {
   50% { box-shadow: 0 0 40px rgba(200, 16, 46, 0.8), 0 0 80px rgba(200, 16, 46, 0.3); }
 }
 
+@keyframes pulse-glow-amber {
+  0%, 100% { box-shadow: 0 0 20px rgba(217, 100, 31, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(217, 100, 31, 0.8), 0 0 80px rgba(217, 100, 31, 0.3); }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
@@ -84,6 +89,10 @@ body {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-amber {
+  animation: pulse-glow-amber 2s ease-in-out infinite;
 }
 
 .animate-marquee {
@@ -113,6 +122,20 @@ body {
   border: 1px solid rgba(200, 16, 46, 0.2);
 }
 
+.glass-amber {
+  background: rgba(217, 100, 31, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 100, 31, 0.2);
+}
+
+.glass-ice {
+  background: rgba(79, 168, 224, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(79, 168, 224, 0.2);
+}
+
 .noise {
   position: relative;
 }
@@ -133,6 +156,13 @@ body {
   background-clip: text;
 }
 
+.gradient-text-japan {
+  background: linear-gradient(135deg, #d4a843 0%, #fff 40%, #d9641f 70%, #4fa8e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .neon-border {
   box-shadow: 0 0 0 1px rgba(200, 16, 46, 0.5), 0 0 20px rgba(200, 16, 46, 0.2), inset 0 0 20px rgba(200, 16, 46, 0.05);
 }
@@ -140,6 +170,16 @@ body {
 .day-card:hover .day-number {
   color: #c8102e;
   text-shadow: 0 0 30px rgba(200, 16, 46, 0.8);
+}
+
+.day-card-japan:hover .day-number {
+  color: #d9641f;
+  text-shadow: 0 0 30px rgba(217, 100, 31, 0.8);
+}
+
+.day-card-japan.is-snow:hover .day-number {
+  color: #4fa8e0;
+  text-shadow: 0 0 30px rgba(79, 168, 224, 0.8);
 }
 
 /* Leaflet overrides */
