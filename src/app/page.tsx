@@ -96,8 +96,8 @@ export default function HomePage() {
       {/* ── Hero ── */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 pt-20 pb-16 md:pt-28 md:pb-20">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 24 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7 }}
           className="flex flex-col md:flex-row items-center md:items-start gap-10"
         >
@@ -109,8 +109,8 @@ export default function HomePage() {
           {/* Text */}
           <div className="text-center md:text-left max-w-2xl">
             <motion.p
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: -8 }}
+              animate={{ y: 0 }}
               transition={{ duration: 0.5 }}
               className="text-xs font-semibold uppercase tracking-[0.3em] mb-3"
             >
@@ -161,18 +161,18 @@ export default function HomePage() {
       {/* ── Stats ── */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
         >
           {stats.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 16 }}
+              animate={{ y: 0 }}
               transition={{ duration: 0.45, delay: 0.35 + i * 0.07 }}
-              className="glass rounded-2xl px-5 py-5 text-center group hover:border-[#c8102e]/25 transition-all duration-300 hover:-translate-y-0.5"
+              className="glass rounded-2xl px-5 py-5 text-center group hover:border-[#c8102e]/25 transition-[border-color,transform] duration-300 hover:-translate-y-0.5"
             >
               <div className="text-2xl md:text-3xl font-bold text-[#d4a843] mb-1">{s.value}</div>
               <div className="text-xs text-[#f5f0e8]/45 leading-snug">{s.label}</div>

@@ -101,16 +101,19 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="mt-16 flex justify-center gap-10 md:gap-16"
+          className="mt-16 pb-10 sm:pb-0 flex justify-center gap-10 md:gap-16"
         >
           {[
-            { value: "11", label: "дней" },
-            { value: "3", label: "региона\n(Токио · Киото · Хоккайдо)" },
-            { value: "2", label: "сезона Японии\nза одну поездку" },
+            { value: "11", label: "дней", detail: null },
+            { value: "3", label: "региона", detail: "Токио · Киото · Хоккайдо" },
+            { value: "2", label: "сезона Японии", detail: "за одну поездку" },
           ].map((stat, i) => (
             <div key={i} className="text-center max-w-[9rem]">
               <div className="text-3xl md:text-4xl font-bold text-[#d4a843]">{stat.value}</div>
-              <div className="text-sm text-[#f5f0e8]/50 whitespace-pre-line">{stat.label}</div>
+              <div className="text-sm text-[#f5f0e8]/50">{stat.label}</div>
+              {stat.detail && (
+                <div className="hidden sm:block text-sm text-[#f5f0e8]/50">{stat.detail}</div>
+              )}
             </div>
           ))}
         </motion.div>
@@ -118,7 +121,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >

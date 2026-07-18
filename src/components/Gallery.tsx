@@ -62,11 +62,11 @@ export default function Gallery() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="flex items-baseline gap-4 mb-6"
+            className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-6"
           >
             <h3 className="text-3xl md:text-4xl font-bold text-[#f5f0e8]">Чэнду</h3>
             <span className="text-[#f5f0e8]/30 text-lg">— дни 1–4</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
+            <div className="sm:flex-1 h-px w-full sm:w-auto bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 auto-rows-[180px] md:auto-rows-[240px]">
@@ -82,11 +82,11 @@ export default function Gallery() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-baseline gap-4 mb-6"
+            className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-6"
           >
             <h3 className="text-3xl md:text-4xl font-bold text-[#f5f0e8]">Чунцин</h3>
             <span className="text-[#f5f0e8]/30 text-lg">— дни 5–9</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
+            <div className="sm:flex-1 h-px w-full sm:w-auto bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 auto-rows-[180px] md:auto-rows-[240px]">
