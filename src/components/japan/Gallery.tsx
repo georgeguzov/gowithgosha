@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const tokyo = [
-  { src: "/токио-вечер-1.jpg",  label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
+  { src: "/токио-вечер-1.jpg",  label: "Tokyo, Japan", span: "col-span-1 row-span-2" },
   { src: "/токио-сад-2.jpg",    label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
   { src: "/токио-асакуса-3.jpg", label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
   { src: "/токио-гинкго-4.jpg", label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
