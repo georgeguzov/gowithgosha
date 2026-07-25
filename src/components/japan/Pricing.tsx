@@ -4,12 +4,13 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const included = [
-  "Проживание в комфортных отелях (10 ночей)",
+  "Проживание в комфортных отелях (9 ночей)",
+  "Финальная ночь в большом доме на всю группу",
   "Завтраки",
   "Все трансферы по программе",
   "Синкансэн Токио → Киото",
   "Внутренний перелёт Осака → Саппоро",
-  "Скипассы (2 дня, Niseko United)",
+  "Скипассы (3 дня, Niseko United)",
   "Аренда лыж/сноуборда",
   "Входные билеты по маршруту",
   "Онсэн-вечера",
@@ -20,7 +21,7 @@ const included = [
 const notIncluded = [
   "Международный перелёт до Токио и обратно",
   "Обеды и часть ужинов",
-  "Личные покупки и сувениры",
+  "Личные покупки и сувениры (в том числе шоппинг день 2 — отдельный бюджет)",
   "Медицинская страховка",
 ];
 
@@ -41,7 +42,7 @@ export default function Pricing() {
         >
           <p className="text-[#d9641f] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Стоимость</p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-            От Огня к Снегу&nbsp;— <span className="gradient-text-japan">от $&thinsp;2&thinsp;590</span>
+            От Огня к Снегу&nbsp;— <span className="gradient-text-japan">от $&thinsp;2&thinsp;690</span>
           </h2>
           <p className="text-[#f5f0e8]/50 max-w-xl mx-auto">
             Маршрут, отели, трансферы и билеты внутри Японии уже продуманы. Вам остаётся долететь до Токио и наслаждаться поездкой.

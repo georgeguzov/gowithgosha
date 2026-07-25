@@ -20,10 +20,12 @@ const kyoto = [
 ];
 
 const niseko = [
-  { src: "/нисэко-склон-1.jpg",   label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
-  { src: "/нисэко-йотей-2.jpg",   label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
-  { src: "/нисэко-онсэн-3.jpg",   label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
-  { src: "/нисэко-деревня-4.jpg", label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
+  { src: "/нисэко-склон-1.jpg",       label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
+  { src: "/нисэко-йотей-2.jpg",       label: "Niseko, Hokkaido", span: "col-span-1 row-span-2" },
+  { src: "/нисэко-онсэн-3.jpg",       label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
+  { src: "/нисэко-деревня-4.jpg",     label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
+  { src: "/нисэко-большой-дом.jpg",   label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
+  { src: "/нисэко-группа-вечер.jpg",  label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
 ];
 
 function PhotoCard({ src, label, span, index, inView }: {
@@ -90,7 +92,7 @@ export default function Gallery() {
             className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-6"
           >
             <h3 className="text-3xl md:text-4xl font-bold text-[#f5f0e8]">Киото / Нара / Осака</h3>
-            <span className="text-[#f5f0e8]/30 text-lg">— дни 4–7</span>
+            <span className="text-[#f5f0e8]/30 text-lg">— дни 4–6</span>
             <div className="sm:flex-1 h-px w-full sm:w-auto bg-gradient-to-r from-[#d9641f]/30 to-transparent" />
           </motion.div>
 
@@ -110,7 +112,7 @@ export default function Gallery() {
             className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-6"
           >
             <h3 className="text-3xl md:text-4xl font-bold text-[#f5f0e8]">Нисэко, Хоккайдо</h3>
-            <span className="text-[#f5f0e8]/30 text-lg">— дни 8–11</span>
+            <span className="text-[#f5f0e8]/30 text-lg">— дни 7–10</span>
             <div className="sm:flex-1 h-px w-full sm:w-auto bg-gradient-to-r from-[#4fa8e0]/30 to-transparent" />
           </motion.div>
 
