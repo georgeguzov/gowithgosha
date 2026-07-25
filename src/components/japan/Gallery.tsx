@@ -20,7 +20,6 @@ const kyoto = [
 ];
 
 const niseko = [
-  { src: "/нисэко-склон-1.jpg",       label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
   { src: "/нисэко-йотей-2.jpg",       label: "Niseko, Hokkaido", span: "col-span-1 row-span-2" },
   { src: "/нисэко-онсэн-3.jpg",       label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
   { src: "/нисэко-деревня-4.jpg",     label: "Niseko, Hokkaido", span: "col-span-1 row-span-1" },
