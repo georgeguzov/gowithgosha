@@ -9,6 +9,7 @@ const tokyo = [
   { src: "/токио-сад-2.jpg",    label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
   { src: "/токио-асакуса-3.jpg", label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
   { src: "/токио-гинкго-4.jpg", label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
+  { src: "/токио-5.jpg",        label: "Tokyo, Japan", span: "col-span-1 row-span-1" },
 ];
 
 const kyoto = [
