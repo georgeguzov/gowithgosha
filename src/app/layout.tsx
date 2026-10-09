@@ -11,21 +11,21 @@ const geist = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL("https://gowithgosha.xyz"),
   title: "Go With Gosha — авторские путешествия",
-  description: "Небольшие авторские туры по миру от Гоши Гузова: Китай, Япония, Индонезия и другие направления. Атмосфера, комьюнити и маршруты не из туристического автобуса.",
+  description: "Небольшие авторские туры по миру от Гоши Гузова: Китай, Индонезия, Австралия и другие направления. Атмосфера, комьюнити и маршруты не из туристического автобуса.",
   openGraph: {
     title: "Go With Gosha — авторские путешествия",
-    description: "Небольшие авторские туры по миру от Гоши Гузова: Китай, Япония, Индонезия и другие направления.",
+    description: "Небольшие авторские туры по миру от Гоши Гузова: Китай, Индонезия, Австралия и другие направления.",
     url: "https://gowithgosha.xyz",
     siteName: "Go With Gosha",
     locale: "ru_RU",
     type: "website" as const,
-    images: [{ url: "/japan.jpg", width: 766, height: 400 }],
+    images: [{ url: "/ченду-панда-1.jpg", width: 720, height: 960 }],
   },
   twitter: {
     card: "summary_large_image" as const,
     title: "Go With Gosha — авторские путешествия",
     description: "Небольшие авторские туры по миру от Гоши Гузова.",
-    images: ["/japan.jpg"],
+    images: ["/ченду-панда-1.jpg"],
   },
 };
 

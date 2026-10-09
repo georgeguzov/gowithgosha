@@ -48,8 +48,8 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 glass-red rounded-full px-4 py-2 text-sm mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-[#c8102e] animate-pulse" />
-          <span className="text-[#f5f0e8]/80">Авторский тур · 10–18 октября 2026</span>
+          <span className="text-xs">🔒</span>
+          <span className="text-[#f5f0e8]/80">Набор закрыт · 16–24 октября 2026</span>
         </motion.div>
 
         {/* Main heading */}
@@ -107,7 +107,7 @@ export default function Hero() {
           {[
             { value: "9", label: "дней" },
             { value: "2", label: "города" },
-            { value: "45+", label: "стран\nГоши" },
+            { value: "49+", label: "стран\nГоши" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-[#d4a843]">{stat.value}</div>

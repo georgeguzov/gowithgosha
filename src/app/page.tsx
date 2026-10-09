@@ -1,8 +1,57 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HomeMoments from "@/components/HomeMoments";
+
+const heroPhotos = [
+  "/чунцин-поезд-через-здание.jpg",
+  "/ченду-мост.jpg",
+  "/чунцин-старый-город.jpg",
+  "/чунцин-ночной-3.jpg",
+];
+
+const filmstrip = [
+  "/ченду-1.jpg", "/чунцин-2.jpg", "/день-5.jpg", "/индонезия.jpg", "/австралия.jpg",
+  "/чунцин-5.jpg", "/ченду-8.jpg", "/день-7.jpg", "/чунцин-3.jpg", "/ченду-6.jpg",
+];
+
+function HeroBackground() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex(i => (i + 1) % heroPhotos.length), 6000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <AnimatePresence>
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.8, ease: "easeInOut" }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={heroPhotos[index]}
+            alt=""
+            fill
+            priority={index === 0}
+            className="object-cover"
+            sizes="100vw"
+          />
+        </motion.div>
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/55 via-[#0a0a0f]/75 to-[#0a0a0f]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(200,16,46,0.18),transparent)]" />
+    </div>
+  );
+}
 
 const trips = [
   {
@@ -10,24 +59,12 @@ const trips = [
     country: "Китай",
     title: "Панды и Киберпанк",
     subtitle: "Чэнду + Чунцин",
-    dates: "10–18 октября 2026",
+    dates: "16–24 октября 2026",
     duration: "9 дней",
     price: "$1 490",
     image: "/ченду-панда-1.jpg",
     tags: ["Панды", "Киберпанк", "Хот-пот", "Небольшая группа"],
-    status: "open" as const,
-  },
-  {
-    slug: "japan",
-    country: "Япония",
-    title: "От Огня к Снегу",
-    subtitle: "Токио + Киото + Нисэко",
-    dates: "22 ноября – 2 декабря 2026",
-    duration: "11 дней",
-    price: "от $2 690",
-    image: "/клены-фудзи-обложка.jpg",
-    tags: ["Клёны", "Снег", "Фудзи", "Небольшая группа"],
-    status: "open" as const,
+    status: "closed" as const,
   },
   {
     slug: "indonesia",
@@ -39,7 +76,7 @@ const trips = [
     price: "Уточняется",
     image: "/индонезия.jpg",
     tags: ["Острова", "Джунгли", "Снорклинг", "Комьюнити"],
-    status: "soon" as const,
+    status: "development" as const,
   },
   {
     slug: "australia",
@@ -55,8 +92,15 @@ const trips = [
   },
 ];
 
+const statusConfig = {
+  open: { badge: "Набор открыт", pulse: true, cta: "Подробнее →", linkable: true },
+  closed: { badge: "Набор закрыт", pulse: false, cta: "Мест нет", linkable: true },
+  development: { badge: "В разработке", pulse: false, cta: "Скоро", linkable: false },
+  soon: { badge: "Скоро", pulse: false, cta: "Скоро", linkable: false },
+} as const;
+
 const stats = [
-  { value: "45+", label: "Стран посетил" },
+  { value: "49+", label: "Стран посетил" },
   { value: "5 лет", label: "Путешествий" },
   { value: "5", label: "Поездок в Китай" },
   { value: "3", label: "Страны, где жил" },
@@ -94,72 +138,87 @@ export default function HomePage() {
       </div>
 
       {/* ── Hero ── */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 pt-20 pb-16 md:pt-28 md:pb-20">
-        <motion.div
-          initial={{ y: 24 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col md:flex-row items-center md:items-start gap-10"
-        >
-          {/* Avatar */}
-          <div className="shrink-0 relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-[#c8102e]/40 shadow-[0_0_40px_rgba(200,16,46,0.15)]">
-            <Image src="/я.jpg" alt="Гоша Гузов" fill className="object-cover object-top" sizes="160px" />
-          </div>
+      <section className="relative z-10 overflow-hidden min-h-[640px] md:min-h-[760px] flex items-center">
+        <HeroBackground />
 
-          {/* Text */}
-          <div className="text-center md:text-left max-w-2xl">
-            <motion.p
-              initial={{ y: -8 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-xs font-semibold uppercase tracking-[0.3em] mb-3"
-            >
-              <span className="text-[#f5f0e8]">Go With Gosha</span>
-              <span className="text-[#c8102e]"> · Авторские путешествия</span>
-            </motion.p>
-
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-              Авторские путешествия для тех, кто хочет увидеть мир{" "}
-              <span className="gradient-text">не через окно туристического автобуса.</span>
-            </h1>
-
-            <p className="text-[#f5f0e8]/55 text-lg leading-relaxed mb-8">
-              Новые страны. Новые впечатления. Новые люди, которые становятся друзьями и с которыми хочется увидеть ещё полмира.
-            </p>
-
-            {/* Social links */}
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              <a
-                href="https://t.me/g_zov"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-colors duration-300"
-              >
-                Telegram 💬
-              </a>
-              <a
-                href="https://instagram.com/gowithgosha"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-colors duration-300"
-              >
-                Instagram 📸
-              </a>
-              <a
-                href="https://instagram.com/g.zov"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass px-5 py-2.5 rounded-full text-sm text-[#f5f0e8]/70 hover:text-white transition-colors duration-300"
-              >
-                @g.zov 📷
-              </a>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 w-full">
+          <motion.div
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row items-center md:items-start gap-10"
+          >
+            {/* Avatar */}
+            <div className="shrink-0 relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-[#c8102e]/40 shadow-[0_0_40px_rgba(200,16,46,0.25)]">
+              <Image src="/я.jpg" alt="Гоша Гузов" fill className="object-cover object-top" sizes="160px" />
             </div>
-          </div>
-        </motion.div>
+
+            {/* Text */}
+            <div className="text-center md:text-left max-w-2xl">
+              <motion.p
+                initial={{ y: -8 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-xs font-semibold uppercase tracking-[0.3em] mb-3"
+              >
+                <span className="text-white">Go With Gosha</span>
+                <span className="text-[#ff5a73]"> · Авторские путешествия</span>
+              </motion.p>
+
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-white">
+                Авторские путешествия для тех, кто хочет увидеть мир{" "}
+                <span className="gradient-text">не через окно туристического автобуса.</span>
+              </h1>
+
+              <p className="text-white/70 text-lg leading-relaxed mb-8">
+                Новые страны. Новые впечатления. Новые люди, которые становятся друзьями и с которыми хочется увидеть ещё полмира.
+              </p>
+
+              {/* Social links */}
+              <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                <a
+                  href="https://t.me/g_zov"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass px-5 py-2.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-300"
+                >
+                  Telegram 💬
+                </a>
+                <a
+                  href="https://instagram.com/gowithgosha"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass px-5 py-2.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-300"
+                >
+                  Instagram 📸
+                </a>
+                <a
+                  href="https://instagram.com/g.zov"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass px-5 py-2.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-300"
+                >
+                  @g.zov 📷
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
+      {/* ── Filmstrip ── */}
+      <div className="relative z-10 py-6 overflow-hidden border-y border-white/[0.06]">
+        <div className="flex gap-3 w-max animate-marquee hover:[animation-play-state:paused]">
+          {[...filmstrip, ...filmstrip].map((src, i) => (
+            <div key={i} className="relative w-28 h-20 md:w-36 md:h-24 rounded-xl overflow-hidden shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300">
+              <Image src={src} alt="" fill className="object-cover" sizes="150px" />
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── Stats ── */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
+      <section className="relative z-10 max-w-5xl mx-auto px-6 py-20">
         <motion.div
           initial={{ y: 20 }}
           animate={{ y: 0 }}
@@ -197,8 +256,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, i) => {
-              const isOpen = trip.status === "open";
-              const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-[border-color,transform] duration-300 ${isOpen ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
+              const cfg = statusConfig[trip.status];
+              const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-[border-color,transform] duration-300 ${cfg.linkable ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
               const cardContent = (
                 <>
                   <div className="relative h-52 shrink-0 overflow-hidden">
@@ -214,14 +273,19 @@ export default function HomePage() {
                     </div>
 
                     <div className="absolute top-3 left-3">
-                      {isOpen ? (
+                      {trip.status === "open" ? (
                         <span className="glass-red text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
-                          Набор открыт
+                          {cfg.badge}
+                        </span>
+                      ) : trip.status === "closed" ? (
+                        <span className="glass text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 text-[#f5f0e8]/60">
+                          <span className="text-[10px]">🔒</span>
+                          {cfg.badge}
                         </span>
                       ) : (
                         <span className="glass text-xs font-semibold px-3 py-1 rounded-full text-[#f5f0e8]/50">
-                          Скоро
+                          {cfg.badge}
                         </span>
                       )}
                     </div>
@@ -248,13 +312,13 @@ export default function HomePage() {
                         <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
                         <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
                       </div>
-                      {isOpen ? (
+                      {trip.status === "open" ? (
                         <div className="glass-red px-4 py-2 rounded-full text-sm font-medium text-[#f5f0e8] group-hover:bg-[#c8102e]/20 transition-colors duration-300">
-                          Подробнее →
+                          {cfg.cta}
                         </div>
                       ) : (
                         <div className="glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/40">
-                          Скоро
+                          {cfg.cta}
                         </div>
                       )}
                     </div>
@@ -270,7 +334,7 @@ export default function HomePage() {
                   viewport={vp}
                   transition={{ duration: 0.45, delay: i * 0.1 }}
                 >
-                  {isOpen ? (
+                  {cfg.linkable ? (
                     <Link href={`/${trip.slug}`} className={cardClassName}>
                       {cardContent}
                     </Link>
@@ -283,6 +347,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Моменты ── */}
+      <HomeMoments />
 
       {/* ── Это больше, чем тур ── */}
       <section className="relative z-10 py-20 px-6 overflow-hidden">
@@ -303,21 +370,31 @@ export default function HomePage() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            {/* Big quote */}
+            {/* Big quote, over a real travel photo */}
             <motion.div
               initial={{ y: 20 }}
               whileInView={{ y: 0 }}
               viewport={vp}
               transition={{ duration: 0.55 }}
-              className="glass-red rounded-3xl p-8 md:p-10 flex flex-col justify-center"
+              className="relative rounded-3xl overflow-hidden min-h-[320px] flex flex-col justify-end"
             >
-              <div className="text-5xl text-[#c8102e]/25 font-serif leading-none mb-4 select-none">"</div>
-              <p className="text-lg md:text-xl text-[#f5f0e8]/85 leading-relaxed">
-                Большинство туров заканчиваются в аэропорту.
-              </p>
-              <p className="mt-4 text-[#f5f0e8]/60 leading-relaxed">
-                Я создаю путешествия и комьюнити, в которых важны не только страны и маршруты, но и люди рядом.
-              </p>
+              <Image
+                src="/чунцин-6.jpg"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/50 to-transparent" />
+              <div className="relative z-10 p-8 md:p-10">
+                <div className="text-5xl text-[#c8102e]/40 font-serif leading-none mb-4 select-none">"</div>
+                <p className="text-lg md:text-xl text-white leading-relaxed">
+                  Большинство туров заканчиваются в аэропорту.
+                </p>
+                <p className="mt-4 text-white/70 leading-relaxed">
+                  Я создаю путешествия и комьюнити, в которых важны не только страны и маршруты, но и люди рядом.
+                </p>
+              </div>
             </motion.div>
 
             {/* Details */}
@@ -414,9 +491,20 @@ export default function HomePage() {
             whileInView={{ y: 0 }}
             viewport={vp}
             transition={{ duration: 0.6 }}
-            className="glass-red rounded-3xl px-8 py-14 md:px-14 text-center"
+            className="relative rounded-3xl overflow-hidden px-8 py-14 md:px-14 text-center"
           >
-            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-5">Присоединяйся</p>
+            <Image
+              src="/ченду-5.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+            />
+            <div className="absolute inset-0 bg-[#0a0a0f]/80" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,rgba(200,16,46,0.2),transparent)]" />
+
+            <div className="relative z-10">
+            <p className="text-[#ff5a73] text-sm font-semibold uppercase tracking-[0.3em] mb-5">Присоединяйся</p>
             <h2 className="text-3xl md:text-5xl font-bold mb-5">
               Готов к следующему <span className="gradient-text">приключению?</span>
             </h2>
@@ -441,6 +529,7 @@ export default function HomePage() {
               >
                 Посмотреть туры ↑
               </a>
+            </div>
             </div>
           </motion.div>
         </div>

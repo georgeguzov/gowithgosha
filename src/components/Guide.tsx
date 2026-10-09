@@ -52,7 +52,7 @@ export default function Guide() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -top-2 -right-2 glass-red rounded-2xl px-4 py-2 text-center"
               >
-                <div className="text-2xl font-bold text-[#d4a843]">45+</div>
+                <div className="text-2xl font-bold text-[#d4a843]">49+</div>
                 <div className="text-xs text-[#f5f0e8]/60">стран</div>
               </motion.div>
             </div>
@@ -62,7 +62,7 @@ export default function Guide() {
               {countries.map((flag, i) => (
                 <span key={i} className="text-2xl">{flag}</span>
               ))}
-              <span className="text-sm text-[#f5f0e8]/30 self-center ml-1">и ещё 20+</span>
+              <span className="text-sm text-[#f5f0e8]/30 self-center ml-1">и ещё 25+</span>
             </div>
           </motion.div>
 
@@ -80,7 +80,7 @@ export default function Guide() {
             <div className="space-y-4 text-[#f5f0e8]/70 leading-relaxed">
               <p>
                 Последние пять лет я путешествую по миру и уже успел побывать более чем в&nbsp;
-                <span className="text-[#d4a843] font-semibold">45 странах</span>. Жил в Европе и Индонезии,
+                <span className="text-[#d4a843] font-semibold">49 странах</span>. Жил в Европе и Индонезии,
                 постоянно исследую новые культуры.
               </p>
               <p>
@@ -99,7 +99,7 @@ export default function Guide() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              {["5 лет в путешествиях", "Авторские туры", "45+ стран", "Маленькие группы"].map((tag, i) => (
+              {["5 лет в путешествиях", "Авторские туры", "49+ стран", "Маленькие группы"].map((tag, i) => (
                 <span key={i} className="glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/70">
                   {tag}
                 </span>

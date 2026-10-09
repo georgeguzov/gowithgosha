@@ -107,7 +107,7 @@ export default function Pricing() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest mb-1">Даты</p>
-                  <p className="text-xl font-bold text-[#f5f0e8]">10–18 октября 2026</p>
+                  <p className="text-xl font-bold text-[#f5f0e8]">16–24 октября 2026</p>
                 </div>
                 <div className="text-4xl">🗓️</div>
               </div>
@@ -117,8 +117,10 @@ export default function Pricing() {
                   <p className="text-base font-semibold text-[#f5f0e8]">до 10 человек</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest mb-1">Осталось мест</p>
-                  <p className="text-base font-semibold text-[#d4a843]">6</p>
+                  <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest mb-1">Статус</p>
+                  <p className="text-base font-semibold text-[#f5f0e8]/60 flex items-center gap-1.5 justify-end">
+                    <span className="text-xs">🔒</span> Набор закрыт
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -132,14 +134,10 @@ export default function Pricing() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="text-center"
         >
-          <a
-            href="#contact"
-            className="group relative inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#c8102e] rounded-full text-white font-semibold text-lg md:text-xl overflow-hidden transition-transform duration-300 hover:scale-105 animate-pulse-glow"
-          >
-            <span className="relative z-10">Записаться в тур</span>
-            <span className="relative z-10 text-2xl">🚀</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#c8102e] via-[#e8203e] to-[#c8102e] bg-[length:200%] animate-[shimmer_2s_linear_infinite]" />
-          </a>
+          <div className="glass rounded-full inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 text-[#f5f0e8]/60 font-semibold text-lg md:text-xl">
+            <span className="text-xs">🔒</span>
+            <span>Набор на эту дату закрыт</span>
+          </div>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             <a
               href="https://instagram.com/gowithgosha"
@@ -159,7 +157,7 @@ export default function Pricing() {
             </a>
           </div>
           <p className="mt-3 text-sm text-[#f5f0e8]/40">
-            Если чувствуешь, что это твой вайб — напиши мне в Telegram. Расскажу все детали и помогу понять, подходит ли тебе этот трип.
+            Хотите в следующую поездку в Китай или другую страну — оставьте заявку ниже, я напишу, как только откроется новый набор.
           </p>
         </motion.div>
       </div>
