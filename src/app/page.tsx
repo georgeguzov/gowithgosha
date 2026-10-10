@@ -53,7 +53,20 @@ function HeroBackground() {
   );
 }
 
-const trips = [
+type TripStatus = "open" | "closed" | "development" | "soon";
+
+const trips: {
+  slug: string;
+  country: string;
+  title: string;
+  subtitle: string;
+  dates: string;
+  duration: string;
+  price: string;
+  image: string;
+  tags: string[];
+  status: TripStatus;
+}[] = [
   {
     slug: "china",
     country: "Китай",
@@ -64,7 +77,7 @@ const trips = [
     price: "$1 490",
     image: "/ченду-панда-1.jpg",
     tags: ["Панды", "Киберпанк", "Хот-пот", "Небольшая группа"],
-    status: "closed" as const,
+    status: "closed",
   },
   {
     slug: "indonesia",
@@ -76,7 +89,7 @@ const trips = [
     price: "Уточняется",
     image: "/индонезия.jpg",
     tags: ["Острова", "Джунгли", "Снорклинг", "Комьюнити"],
-    status: "development" as const,
+    status: "development",
   },
   {
     slug: "australia",
@@ -88,7 +101,7 @@ const trips = [
     price: "Уточняется",
     image: "/австралия.jpg",
     tags: ["Пляжи", "Мегаполисы", "Дикая природа", "Комьюнити"],
-    status: "soon" as const,
+    status: "soon",
   },
 ];
 
