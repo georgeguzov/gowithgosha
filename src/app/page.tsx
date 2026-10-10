@@ -4,7 +4,7 @@ import { motion, useSpring } from "framer-motion";
 import { useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import HomeMoments from "@/components/HomeMoments";
+import MomentsCarousel from "@/components/MomentsCarousel";
 import Globe from "@/components/Globe";
 import { TelegramIcon, InstagramIcon } from "@/components/icons";
 
@@ -148,7 +148,7 @@ function TripCard({
 
   const cardContent = (
     <>
-      <div className="relative h-56 md:h-64 shrink-0 overflow-hidden">
+      <div className="relative h-64 md:h-80 shrink-0 overflow-hidden">
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
           <Image
             src={trip.image}
@@ -183,11 +183,11 @@ function TripCard({
         </div>
       </div>
 
-      <div className="p-5 flex-1 flex flex-col">
-        <h3 className="text-lg font-bold text-[#f5f0e8] mb-1">{trip.title}</h3>
-        <p className="text-sm text-[#f5f0e8]/50 mb-4">{trip.subtitle} · {trip.dates}</p>
+      <div className="p-6 flex-1 flex flex-col">
+        <h3 className="text-xl font-bold text-[#f5f0e8] mb-1.5">{trip.title}</h3>
+        <p className="text-sm text-[#f5f0e8]/50 mb-5">{trip.subtitle} · {trip.dates}</p>
 
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div className="flex flex-wrap gap-2 mb-6">
           {trip.tags.map(tag => (
             <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
               {tag}
@@ -198,7 +198,7 @@ function TripCard({
         <div className="mt-auto flex items-center justify-between">
           <div>
             <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
-            <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
+            <p className="text-2xl font-bold text-[#d4a843]">{trip.price}</p>
           </div>
           {trip.status === "open" ? (
             <div className="glass-red px-4 py-2 rounded-full text-sm font-medium text-[#f5f0e8] group-hover:bg-[#c8102e]/20 transition-colors duration-300">
@@ -322,12 +322,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Карта и статистика ── */}
-      <Globe />
-
       {/* ── Туры ── */}
       <section id="tours" className="relative z-10 py-16 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -339,7 +336,7 @@ export default function HomePage() {
             <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             {trips.map((trip, i) => (
               <TripCard key={trip.slug} trip={trip} index={i} />
             ))}
@@ -347,8 +344,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Моменты ── */}
-      <HomeMoments />
+      {/* ── Карта и статистика ── */}
+      <Globe />
 
       {/* ── Это больше, чем тур ── */}
       <section className="relative z-10 py-20 px-6 overflow-hidden">
@@ -366,30 +363,17 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-5xl font-bold">
               Это больше, чем <span className="gradient-text">тур</span>
             </h2>
+            <p className="mt-4 text-[#f5f0e8]/40 text-sm">Не стоковые фото — моменты из настоящих поездок</p>
           </motion.div>
 
-          {/* Big quote, over a real travel photo */}
+          {/* Quote, over a carousel of real trip photos */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.55 }}
-            className="relative rounded-3xl overflow-hidden min-h-[280px] md:min-h-[360px] flex flex-col justify-end"
           >
-            <Image
-              src="/travel-iceland-glacier-lagoon.jpg"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
-            <div className="relative z-10 p-8 md:p-12 max-w-2xl">
-              <div className="text-5xl text-[#c8102e]/40 font-serif leading-none mb-3 select-none">"</div>
-              <p className="text-xl md:text-2xl text-white leading-snug font-medium">
-                Большинство туров заканчиваются в аэропорту.
-              </p>
-            </div>
+            <MomentsCarousel />
           </motion.div>
 
           {/* Statement */}

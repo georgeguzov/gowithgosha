@@ -2,98 +2,19 @@
 
 import {
   motion,
-  useInView,
-  useMotionValue,
-  useMotionTemplate,
+  useMotionValueEvent,
   useTransform,
   useScroll,
-  animate,
+  type MotionValue,
 } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-const stats = [
-  { value: 49, suffix: "+", label: "Стран посетил" },
-  { value: 5, suffix: " лет", label: "Путешествий" },
-  { value: 5, suffix: "", label: "Поездок в Китай" },
-  { value: 3, suffix: "", label: "Страны, где жил" },
-  { value: 100, suffix: "+", label: "Перелётов" },
-];
-
-// Floating label anchors — kept clear of the globe's zoomed bounding box (roughly 20%–80%).
-const floatLayout: { top: string; left?: string; right?: string }[] = [
-  { top: "1%", left: "6%" },
-  { top: "20%", right: "4%" },
-  { top: "48%", left: "0%" },
-  { top: "74%", right: "2%" },
-  { top: "92%", left: "14%" },
-];
-
-const vp = { once: true, margin: "-60px" } as const;
-
-function CountUp({ value, duration = 1.3 }: { value: number; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest).toString());
-
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(count, value, { duration, ease: [0.22, 1, 0.36, 1] });
-    return () => controls.stop();
-  }, [inView, value, duration, count]);
-
-  return <motion.span ref={ref}>{rounded}</motion.span>;
-}
-
-function FloatingStat({
-  stat,
-  style,
-  delay,
-}: {
-  stat: (typeof stats)[number];
-  style: { top: string; left?: string; right?: string };
-  delay: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: 10 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={vp}
-      transition={{ duration: 0.6, delay }}
-      className="absolute w-28 text-center pointer-events-none"
-      style={style}
-    >
-      <motion.div
-        animate={{ y: [0, -9, 0] }}
-        transition={{ duration: 4.5 + delay * 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="text-2xl font-bold text-[#d4a843] tabular-nums [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
-          <CountUp value={stat.value} />
-          {stat.suffix}
-        </div>
-        <div className="text-[11px] text-[#f5f0e8]/55 mt-0.5 leading-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
-          {stat.label}
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function CompactStat({ stat }: { stat: (typeof stats)[number] }) {
-  return (
-    <div className="text-center">
-      <div className="text-xl font-bold text-[#d4a843] tabular-nums">
-        <CountUp value={stat.value} />
-        {stat.suffix}
-      </div>
-      <div className="text-[11px] text-[#f5f0e8]/45 mt-0.5">{stat.label}</div>
-    </div>
-  );
-}
+const TILT = 0.36;
+const PING_DURATION = 950;
 
 // Deterministic Fibonacci-sphere point cloud. Every 4th point is marked "visited" —
 // roughly the same ~1-in-4 ratio as 49 of the world's ~195 countries.
-const TOTAL = 200;
+const TOTAL = 220;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 const spherePoints = Array.from({ length: TOTAL }, (_, i) => {
   const y = 1 - (i / (TOTAL - 1)) * 2;
@@ -108,17 +29,15 @@ const spherePoints = Array.from({ length: TOTAL }, (_, i) => {
 });
 const visitedIndexes = spherePoints.map((p, i) => (p.visited ? i : -1)).filter((i) => i >= 0);
 
-const TILT = 0.36;
-const PING_DURATION = 950;
-
 type Ping = { fromIdx: number; toIdx: number; start: number };
 type Burst = { idx: number; start: number };
 
-function InteractiveGlobe() {
+function InteractiveGlobe({ scrollRotation }: { scrollRotation: MotionValue<number> }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const rotationRef = useRef(0.6);
-  const velocityRef = useRef(0.0022);
+  const scrollRotationRef = useRef(0);
+  const velocityRef = useRef(0.0018);
   const draggingRef = useRef(false);
   const lastXRef = useRef(0);
   const dragMovedRef = useRef(0);
@@ -126,6 +45,10 @@ function InteractiveGlobe() {
   const screensRef = useRef<{ sx: number; sy: number; depth: number }[]>([]);
   const pingsRef = useRef<Ping[]>([]);
   const burstsRef = useRef<Burst[]>([]);
+
+  useMotionValueEvent(scrollRotation, "change", (v) => {
+    scrollRotationRef.current = v;
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -171,9 +94,9 @@ function InteractiveGlobe() {
 
       if (!draggingRef.current) {
         rotationRef.current += velocityRef.current;
-        velocityRef.current += (0.0022 - velocityRef.current) * 0.02;
+        velocityRef.current += (0.0018 - velocityRef.current) * 0.02;
       }
-      const angle = rotationRef.current;
+      const angle = rotationRef.current + scrollRotationRef.current;
       const cosA = Math.cos(angle);
       const sinA = Math.sin(angle);
       const cosT = Math.cos(TILT);
@@ -189,9 +112,15 @@ function InteractiveGlobe() {
         return { sx: cx + rx * R, sy: cy + ry2 * R, depth: rz2 };
       }
 
+      // outer atmosphere rim
+      ctx!.beginPath();
+      ctx!.arc(cx, cy, R + 2, 0, Math.PI * 2);
+      ctx!.strokeStyle = "rgba(255,210,150,0.12)";
+      ctx!.lineWidth = 3;
+      ctx!.stroke();
       ctx!.beginPath();
       ctx!.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx!.strokeStyle = "rgba(255,255,255,0.06)";
+      ctx!.strokeStyle = "rgba(255,255,255,0.08)";
       ctx!.lineWidth = 1;
       ctx!.stroke();
 
@@ -201,21 +130,21 @@ function InteractiveGlobe() {
         const t = (depth + 1) / 2;
 
         if (p.visited) {
-          const r = 1.8 + t * 2.1;
+          const r = 1.9 + t * 2.3;
           ctx!.beginPath();
-          ctx!.arc(sx, sy, r + 3.5, 0, Math.PI * 2);
-          ctx!.fillStyle = `rgba(212,168,67,${0.06 + t * 0.1})`;
+          ctx!.arc(sx, sy, r + 4, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(212,168,67,${0.07 + t * 0.11})`;
           ctx!.fill();
           ctx!.beginPath();
           ctx!.arc(sx, sy, r, 0, Math.PI * 2);
-          ctx!.fillStyle = `rgba(212,168,67,${0.4 + t * 0.6})`;
-          ctx!.shadowColor = "rgba(212,168,67,0.85)";
-          ctx!.shadowBlur = 4 + t * 5;
+          ctx!.fillStyle = `rgba(212,168,67,${0.42 + t * 0.58})`;
+          ctx!.shadowColor = "rgba(212,168,67,0.9)";
+          ctx!.shadowBlur = 5 + t * 6;
           ctx!.fill();
           ctx!.shadowBlur = 0;
         } else {
-          const alpha = 0.05 + t * 0.16;
-          const r = 0.8 + t * 1.1;
+          const alpha = 0.05 + t * 0.17;
+          const r = 0.8 + t * 1.2;
           ctx!.beginPath();
           ctx!.arc(sx, sy, r, 0, Math.PI * 2);
           ctx!.fillStyle = `rgba(245,240,232,${alpha})`;
@@ -227,13 +156,13 @@ function InteractiveGlobe() {
 
       const now = performance.now();
 
-      burstsRef.current = burstsRef.current.filter((b) => now - b.start < 600);
+      burstsRef.current = burstsRef.current.filter((b) => now - b.start < 650);
       for (const b of burstsRef.current) {
         const p = screens[b.idx];
         if (!p) continue;
-        const t = (now - b.start) / 600;
+        const t = (now - b.start) / 650;
         ctx!.beginPath();
-        ctx!.arc(p.sx, p.sy, 3 + t * 16, 0, Math.PI * 2);
+        ctx!.arc(p.sx, p.sy, 3 + t * 20, 0, Math.PI * 2);
         ctx!.strokeStyle = `rgba(200,16,46,${0.7 * (1 - t)})`;
         ctx!.lineWidth = 1.5;
         ctx!.stroke();
@@ -250,7 +179,7 @@ function InteractiveGlobe() {
         const dx = mx - cx;
         const dy = my - cy;
         const dist = Math.hypot(dx, dy) || 1;
-        const ctrl = { x: mx + (dx / dist) * 30, y: my + (dy / dist) * 30 };
+        const ctrl = { x: mx + (dx / dist) * 34, y: my + (dy / dist) * 34 };
 
         ctx!.beginPath();
         const steps = 28;
@@ -261,15 +190,15 @@ function InteractiveGlobe() {
           else ctx!.lineTo(pt.x, pt.y);
         }
         ctx!.strokeStyle = `rgba(212,168,67,${0.75 * (1 - t * 0.4)})`;
-        ctx!.lineWidth = 1.3;
+        ctx!.lineWidth = 1.4;
         ctx!.stroke();
 
         const head = quadPoint(from, to, ctrl, t);
         ctx!.beginPath();
-        ctx!.arc(head.x, head.y, 2.6, 0, Math.PI * 2);
+        ctx!.arc(head.x, head.y, 2.8, 0, Math.PI * 2);
         ctx!.fillStyle = "rgba(255,255,255,0.95)";
         ctx!.shadowColor = "#d4a843";
-        ctx!.shadowBlur = 10;
+        ctx!.shadowBlur = 11;
         ctx!.fill();
         ctx!.shadowBlur = 0;
       }
@@ -313,7 +242,7 @@ function InteractiveGlobe() {
       const rect = canvas!.getBoundingClientRect();
       const mx = e.clientX - rect.left;
       const my = e.clientY - rect.top;
-      canvas!.style.cursor = hitTest(mx, my, 10) >= 0 ? "pointer" : "grab";
+      canvas!.style.cursor = hitTest(mx, my, 11) >= 0 ? "pointer" : "grab";
     }
     function pointerUp(e: PointerEvent) {
       draggingRef.current = false;
@@ -321,7 +250,7 @@ function InteractiveGlobe() {
         const rect = canvas!.getBoundingClientRect();
         const mx = e.clientX - rect.left;
         const my = e.clientY - rect.top;
-        const hitIdx = hitTest(mx, my, 12);
+        const hitIdx = hitTest(mx, my, 13);
         if (hitIdx >= 0) {
           let targetIdx = visitedIndexes[Math.floor(Math.random() * visitedIndexes.length)];
           if (targetIdx === hitIdx) {
@@ -352,13 +281,18 @@ function InteractiveGlobe() {
   }, []);
 
   return (
-    <div ref={wrapRef} className="relative w-64 h-64 md:w-80 md:h-80">
+    <div ref={wrapRef} className="relative w-[280px] h-[280px] md:w-[440px] md:h-[440px]">
+      {/* outer atmosphere glow */}
+      <div
+        className="absolute -inset-10 rounded-full pointer-events-none blur-2xl"
+        style={{ background: "radial-gradient(circle, rgba(212,168,67,0.16), rgba(200,16,46,0.1) 45%, transparent 72%)" }}
+      />
       <div
         className="absolute inset-0 rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 32% 28%, rgba(255,255,255,0.16), rgba(200,16,46,0.18) 42%, rgba(10,10,15,0.92) 76%)",
-          boxShadow: "0 0 90px rgba(200,16,46,0.22), inset -24px -24px 60px rgba(0,0,0,0.6)",
+            "radial-gradient(circle at 30% 26%, rgba(255,255,255,0.2), rgba(200,16,46,0.2) 40%, rgba(8,8,13,0.95) 74%)",
+          boxShadow: "0 0 120px rgba(200,16,46,0.28), inset -28px -28px 70px rgba(0,0,0,0.65), inset 14px 14px 40px rgba(255,255,255,0.04)",
         }}
       />
       <canvas ref={canvasRef} className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none" />
@@ -366,58 +300,106 @@ function InteractiveGlobe() {
   );
 }
 
-export default function Globe() {
-  const sectionRef = useRef<HTMLElement>(null);
+function Starfield() {
+  const stars = [
+    "12% 18%", "28% 8%", "42% 22%", "61% 10%", "77% 20%", "89% 14%",
+    "8% 42%", "93% 46%", "18% 64%", "84% 60%", "35% 82%", "66% 88%",
+    "50% 50%", "22% 34%", "72% 36%", "58% 70%", "4% 76%", "96% 80%",
+  ];
+  const image = stars
+    .map((pos) => `radial-gradient(1.4px 1.4px at ${pos}, rgba(255,255,255,0.55), transparent)`)
+    .join(", ");
+  return <div className="absolute inset-0 pointer-events-none opacity-70" style={{ backgroundImage: image }} />;
+}
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "center center"],
-  });
-  const scale = useTransform(scrollYProgress, [0, 1], [1.5, 1]);
-  const blurPx = useTransform(scrollYProgress, [0, 1], [10, 0]);
-  const globeOpacity = useTransform(scrollYProgress, [0, 0.35, 1], [0, 1, 1]);
-  const filter = useMotionTemplate`blur(${blurPx}px)`;
+type SceneProps = {
+  progress: MotionValue<number>;
+  fadeIn: [number, number];
+  fadeOut: [number, number];
+  countWindow?: [number, number];
+  value?: number;
+  suffix?: string;
+  kicker?: string;
+  label: string;
+};
+
+function Scene({ progress, fadeIn, fadeOut, countWindow, value, suffix, kicker, label }: SceneProps) {
+  const opacity = useTransform(progress, [fadeIn[0], fadeIn[1], fadeOut[0], fadeOut[1]], [0, 1, 1, 0]);
+  const y = useTransform(progress, [fadeIn[0], fadeIn[1]], [26, 0]);
+  const count = useTransform(progress, countWindow ?? [0, 1], [0, value ?? 0]);
+  const rounded = useTransform(count, (v) => Math.round(v).toString());
 
   return (
-    <section ref={sectionRef} className="relative z-10 max-w-5xl mx-auto px-6 py-20 md:py-28">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={vp}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-4"
-      >
-        <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Опыт</p>
-        <h2 className="text-3xl md:text-5xl font-bold">
-          Полмира <span className="gradient-text">позади</span>
-        </h2>
-        <p className="mt-4 text-[#f5f0e8]/45 max-w-md mx-auto">
-          5 лет в дороге и 49+ стран — я знаю, куда стоит ехать.
-        </p>
-      </motion.div>
-
-      <div className="relative max-w-4xl mx-auto h-[420px] md:h-[520px] flex items-center justify-center mt-8">
-        <motion.div style={{ scale, opacity: globeOpacity, filter }}>
-          <InteractiveGlobe />
-        </motion.div>
-
-        <div className="hidden md:block">
-          {stats.map((s, i) => (
-            <FloatingStat key={s.label} stat={s} style={floatLayout[i]} delay={0.5 + i * 0.1} />
-          ))}
+    <motion.div style={{ opacity, y }} className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+      {kicker && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#c8102e] mb-4">{kicker}</p>}
+      {value !== undefined ? (
+        <div className="text-6xl md:text-8xl font-bold text-white tabular-nums [text-shadow:0_4px_30px_rgba(0,0,0,0.6)]">
+          <motion.span>{rounded}</motion.span>
+          {suffix}
         </div>
+      ) : null}
+      <p className="mt-4 text-lg md:text-2xl text-white/70 max-w-sm md:max-w-md [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">{label}</p>
+    </motion.div>
+  );
+}
+
+export default function Globe() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+
+  const entryScale = useTransform(scrollYProgress, [0, 0.07], [1.18, 1]);
+  const scrollRotation = useTransform(scrollYProgress, [0, 1], [0, Math.PI * 2.2]);
+
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
+
+  return (
+    <>
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-20 md:pt-28 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4"
+        >
+          Опыт
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="text-3xl md:text-5xl font-bold"
+        >
+          Полмира <span className="gradient-text">позади</span>
+        </motion.h2>
       </div>
 
-      <p className="text-center text-xs text-[#f5f0e8]/25 mt-2 md:hidden">Потяни глобус — и нажми на точку</p>
-      <p className="hidden md:block text-center text-xs text-[#f5f0e8]/25 mt-2">
-        Потяни глобус, чтобы покрутить, и нажми на точку
-      </p>
+      <section ref={sectionRef} className="relative h-[300vh] md:h-[360vh]">
+        <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
+          <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_40%,rgba(200,16,46,0.1),transparent)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_85%_75%,rgba(212,168,67,0.07),transparent)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_10%_20%,rgba(0,80,160,0.05),transparent)]" />
+            <Starfield />
+          </motion.div>
 
-      <div className="md:hidden mt-10 flex flex-wrap justify-center gap-x-7 gap-y-4">
-        {stats.map((s) => (
-          <CompactStat key={s.label} stat={s} />
-        ))}
-      </div>
-    </section>
+          <motion.div style={{ scale: entryScale }} className="relative z-10">
+            <InteractiveGlobe scrollRotation={scrollRotation} />
+          </motion.div>
+
+          <div className="absolute inset-0 z-20">
+            <Scene progress={scrollYProgress} fadeIn={[0, 0.08]} fadeOut={[0.25, 0.32]} countWindow={[0.02, 0.22]} value={49} suffix="+" kicker="Стран" label="я увидел своими глазами" />
+            <Scene progress={scrollYProgress} fadeIn={[0.34, 0.41]} fadeOut={[0.58, 0.65]} countWindow={[0.36, 0.55]} value={5} suffix=" лет" kicker="В дороге" label="без остановок, без шаблонных туров" />
+            <Scene progress={scrollYProgress} fadeIn={[0.67, 0.74]} fadeOut={[0.88, 0.94]} countWindow={[0.69, 0.87]} value={100} suffix="+" kicker="Перелётов" label="чтобы быть там, где стоит быть" />
+            <Scene progress={scrollYProgress} fadeIn={[0.9, 0.96]} fadeOut={[1, 1]} label="Я знаю, куда стоит ехать — и с кем." />
+          </div>
+
+          <p className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-xs text-white/25">
+            Потяни глобус, чтобы покрутить, и нажми на точку
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
