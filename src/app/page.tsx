@@ -1,88 +1,33 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useSpring } from "framer-motion";
+import { useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import HomeMoments from "@/components/HomeMoments";
-
-const filmstrip = [
-  "/travel-iceland-skogafoss-rainbow.jpg",
-  "/travel-indonesia-komodo-padar.jpg",
-  "/travel-china-chengdu-ifs-panda.jpg",
-  "/travel-australia-twelve-apostles-2.jpg",
-  "/travel-iceland-glacier-lagoon.jpg",
-  "/travel-indonesia-komodo-swim.jpg",
-  "/travel-australia-sydney-opera-2.jpg",
-  "/travel-cyprus-sea-caves.jpg",
-  "/travel-china-chengdu-street.jpg",
-  "/travel-iceland-fjadrargljufur-canyon.jpg",
-];
-
-const reels = [
-  { src: "/travel-reel-australia-apostles2.mp4", label: "Австралия" },
-  { src: "/travel-reel-iceland-waterfall.mp4", label: "Исландия" },
-  { src: "/travel-reel-indonesia-boat.mp4", label: "Индонезия" },
-  { src: "/travel-reel-china-streets.mp4", label: "Китай" },
-  { src: "/travel-reel-iceland-beach.mp4", label: "Исландия" },
-  { src: "/travel-reel-ocean-sunset.mp4", label: "Австралия" },
-  { src: "/travel-reel-china-food.mp4", label: "Китай" },
-  { src: "/travel-reel-iceland-river.mp4", label: "Исландия" },
-  { src: "/travel-reel-china-night.mp4", label: "Китай" },
-  { src: "/travel-reel-australia-coast.mp4", label: "Австралия" },
-  { src: "/travel-reel-iceland-drive.mp4", label: "Исландия" },
-  { src: "/travel-reel-iceland-waterfall2.mp4", label: "Исландия" },
-  { src: "/travel-reel-iceland-waterfall3.mp4", label: "Исландия" },
-];
+import Globe from "@/components/Globe";
 
 function HeroBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/travel-australia-twelve-apostles-2.jpg"
-        className="absolute inset-0 w-full h-full object-cover"
+      <motion.div
+        className="absolute inset-0"
+        animate={{ scale: [1, 1.06, 1] }}
+        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
       >
-        <source src="/hero-apostles.mp4" type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/55 via-[#0a0a0f]/75 to-[#0a0a0f]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(200,16,46,0.18),transparent)]" />
-    </div>
-  );
-}
-
-function VideoReel({ src, label }: { src: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const inView = useInView(ref, { margin: "200px" });
-
-  useEffect(() => {
-    if (inView) {
-      videoRef.current?.play().catch(() => {});
-    } else {
-      videoRef.current?.pause();
-    }
-  }, [inView]);
-
-  return (
-    <div ref={ref} className="relative w-40 h-64 md:w-48 md:h-80 rounded-2xl overflow-hidden shrink-0 glass group">
-      {inView && (
         <video
-          ref={videoRef}
+          autoPlay
           muted
           loop
           playsInline
-          preload="none"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          poster="/travel-australia-twelve-apostles-2.jpg"
+          className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={src} type="video/mp4" />
+          <source src="/hero-apostles.mp4" type="video/mp4" />
         </video>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-      <span className="absolute bottom-3 left-3 text-xs font-medium text-white uppercase tracking-wider">{label}</span>
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/60 via-[#0a0a0f]/80 to-[#0a0a0f]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(200,16,46,0.16),transparent)]" />
     </div>
   );
 }
@@ -146,14 +91,6 @@ const statusConfig = {
   soon: { badge: "Скоро", pulse: false, cta: "Скоро", linkable: false },
 } as const;
 
-const stats = [
-  { value: "49+", label: "Стран посетил" },
-  { value: "5 лет", label: "Путешествий" },
-  { value: "5", label: "Поездок в Китай" },
-  { value: "3", label: "Страны, где жил" },
-  { value: "100+", label: "Перелётов" },
-];
-
 const reviews = [
   {
     text: "Путешествовал с Гошей по Европе. Это тот человек, который всегда найдёт интересное место, классную локацию или необычный маршрут. С ним невозможно заскучать.",
@@ -174,6 +111,124 @@ const reviews = [
 
 const vp = { once: true, margin: "-60px" } as const;
 
+function TripCard({
+  trip,
+  index,
+}: {
+  trip: (typeof trips)[number];
+  index: number;
+}) {
+  const cfg = statusConfig[trip.status];
+  const cardRef = useRef<HTMLDivElement>(null);
+  const rotateX = useSpring(0, { stiffness: 150, damping: 15 });
+  const rotateY = useSpring(0, { stiffness: 150, damping: 15 });
+
+  function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    rotateY.set(px * 8);
+    rotateX.set(-py * 8);
+  }
+
+  function handleMouseLeave() {
+    rotateX.set(0);
+    rotateY.set(0);
+  }
+
+  const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-[border-color] duration-300 ${cfg.linkable ? "hover:border-[#c8102e]/30 cursor-pointer" : "cursor-default opacity-80"}`;
+
+  const cardContent = (
+    <>
+      <div className="relative h-56 md:h-64 shrink-0 overflow-hidden">
+        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+          <Image
+            src={trip.image}
+            alt={trip.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
+        </div>
+
+        <div className="absolute top-3 left-3">
+          {trip.status === "open" ? (
+            <span className="glass-red text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
+              {cfg.badge}
+            </span>
+          ) : trip.status === "closed" ? (
+            <span className="glass text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 text-[#f5f0e8]/60">
+              <span className="text-[10px]">🔒</span>
+              {cfg.badge}
+            </span>
+          ) : (
+            <span className="glass text-xs font-semibold px-3 py-1 rounded-full text-[#f5f0e8]/50">
+              {cfg.badge}
+            </span>
+          )}
+        </div>
+
+        <div className="absolute bottom-3 left-4">
+          <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest">{trip.country}</p>
+        </div>
+      </div>
+
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-lg font-bold text-[#f5f0e8] mb-1">{trip.title}</h3>
+        <p className="text-sm text-[#f5f0e8]/50 mb-4">{trip.subtitle} · {trip.dates}</p>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          {trip.tags.map(tag => (
+            <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-auto flex items-center justify-between">
+          <div>
+            <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
+            <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
+          </div>
+          {trip.status === "open" ? (
+            <div className="glass-red px-4 py-2 rounded-full text-sm font-medium text-[#f5f0e8] group-hover:bg-[#c8102e]/20 transition-colors duration-300">
+              {cfg.cta}
+            </div>
+          ) : (
+            <div className="glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/40">
+              {cfg.cta}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0 }}
+      whileInView={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }}
+      viewport={vp}
+      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {cfg.linkable ? (
+        <Link href={`/${trip.slug}`} className={cardClassName}>
+          {cardContent}
+        </Link>
+      ) : (
+        <div className={cardClassName}>{cardContent}</div>
+      )}
+    </motion.div>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="relative min-h-screen bg-[#0a0a0f] text-[#f5f0e8]">
@@ -190,39 +245,59 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 w-full">
           <motion.div
-            initial={{ y: 24 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col md:flex-row items-center md:items-start gap-10"
           >
             {/* Avatar */}
-            <div className="shrink-0 relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-[#c8102e]/40 shadow-[0_0_40px_rgba(200,16,46,0.25)]">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="shrink-0 relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-[#c8102e]/40 shadow-[0_0_40px_rgba(200,16,46,0.25)]"
+            >
               <Image src="/я.jpg" alt="Гоша Гузов" fill className="object-cover object-top" sizes="160px" />
-            </div>
+            </motion.div>
 
             {/* Text */}
             <div className="text-center md:text-left max-w-2xl">
               <motion.p
-                initial={{ y: -8 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
                 className="text-xs font-semibold uppercase tracking-[0.3em] mb-3"
               >
                 <span className="text-white">Go With Gosha</span>
                 <span className="text-[#ff5a73]"> · Авторские путешествия</span>
               </motion.p>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-white">
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-white"
+              >
                 Авторские путешествия для тех, кто хочет увидеть мир{" "}
                 <span className="gradient-text">не через окно туристического автобуса.</span>
-              </h1>
+              </motion.h1>
 
-              <p className="text-white/70 text-lg leading-relaxed mb-8">
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="text-white/70 text-lg leading-relaxed mb-8"
+              >
                 Новые страны. Новые впечатления. Новые люди, которые становятся друзьями и с которыми хочется увидеть ещё полмира.
-              </p>
+              </motion.p>
 
               {/* Social links */}
-              <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.65 }}
+                className="flex flex-wrap gap-3 justify-center md:justify-start"
+              >
                 <a
                   href="https://t.me/g_zov"
                   target="_blank"
@@ -247,71 +322,21 @@ export default function HomePage() {
                 >
                   @g.zov 📷
                 </a>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Filmstrip ── */}
-      <div className="relative z-10 py-6 overflow-hidden border-y border-white/[0.06]">
-        <div className="flex gap-3 w-max animate-marquee hover:[animation-play-state:paused]">
-          {[...filmstrip, ...filmstrip].map((src, i) => (
-            <div key={i} className="relative w-28 h-20 md:w-36 md:h-24 rounded-xl overflow-hidden shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300">
-              <Image src={src} alt="" fill className="object-cover" sizes="150px" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Video Reels ── */}
-      <section className="relative z-10 py-16 px-6 overflow-hidden">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Живые кадры</p>
-            <h2 className="text-3xl md:text-5xl font-bold">
-              Видео <span className="gradient-text">с поездок</span>
-            </h2>
-          </div>
-        </div>
-        <div className="flex gap-4 overflow-x-auto px-6 pb-2 snap-x snap-mandatory scrollbar-hide max-w-5xl mx-auto">
-          {reels.map((r, i) => (
-            <div key={i} className="snap-start">
-              <VideoReel src={r.src} label={r.label} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Stats ── */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 py-20">
-        <motion.div
-          initial={{ y: 20 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
-        >
-          {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ y: 16 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.45, delay: 0.35 + i * 0.07 }}
-              className="glass rounded-2xl px-5 py-5 text-center group hover:border-[#c8102e]/25 transition-[border-color,transform] duration-300 hover:-translate-y-0.5"
-            >
-              <div className="text-2xl md:text-3xl font-bold text-[#d4a843] mb-1">{s.value}</div>
-              <div className="text-xs text-[#f5f0e8]/45 leading-snug">{s.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
+      {/* ── Карта и статистика ── */}
+      <Globe />
 
       {/* ── Туры ── */}
       <section id="tours" className="relative z-10 py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ y: 16 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.5 }}
             className="flex items-baseline gap-4 mb-10"
@@ -321,95 +346,9 @@ export default function HomePage() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trips.map((trip, i) => {
-              const cfg = statusConfig[trip.status];
-              const cardClassName = `group h-full flex flex-col glass rounded-3xl overflow-hidden transition-[border-color,transform] duration-300 ${cfg.linkable ? "hover:border-[#c8102e]/30 hover:-translate-y-1 cursor-pointer" : "cursor-default opacity-80"}`;
-              const cardContent = (
-                <>
-                  <div className="relative h-52 shrink-0 overflow-hidden">
-                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
-                      <Image
-                        src={trip.image}
-                        alt={trip.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent" />
-                    </div>
-
-                    <div className="absolute top-3 left-3">
-                      {trip.status === "open" ? (
-                        <span className="glass-red text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#c8102e] animate-pulse" />
-                          {cfg.badge}
-                        </span>
-                      ) : trip.status === "closed" ? (
-                        <span className="glass text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 text-[#f5f0e8]/60">
-                          <span className="text-[10px]">🔒</span>
-                          {cfg.badge}
-                        </span>
-                      ) : (
-                        <span className="glass text-xs font-semibold px-3 py-1 rounded-full text-[#f5f0e8]/50">
-                          {cfg.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="absolute bottom-3 left-4">
-                      <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest">{trip.country}</p>
-                    </div>
-                  </div>
-
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="text-lg font-bold text-[#f5f0e8] mb-1">{trip.title}</h3>
-                    <p className="text-sm text-[#f5f0e8]/50 mb-4">{trip.subtitle} · {trip.dates}</p>
-
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {trip.tags.map(tag => (
-                        <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="mt-auto flex items-center justify-between">
-                      <div>
-                        <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
-                        <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
-                      </div>
-                      {trip.status === "open" ? (
-                        <div className="glass-red px-4 py-2 rounded-full text-sm font-medium text-[#f5f0e8] group-hover:bg-[#c8102e]/20 transition-colors duration-300">
-                          {cfg.cta}
-                        </div>
-                      ) : (
-                        <div className="glass px-4 py-2 rounded-full text-sm text-[#f5f0e8]/40">
-                          {cfg.cta}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </>
-              );
-
-              return (
-                <motion.div
-                  key={trip.slug}
-                  initial={{ y: 20 }}
-                  whileInView={{ y: 0 }}
-                  viewport={vp}
-                  transition={{ duration: 0.45, delay: i * 0.1 }}
-                >
-                  {cfg.linkable ? (
-                    <Link href={`/${trip.slug}`} className={cardClassName}>
-                      {cardContent}
-                    </Link>
-                  ) : (
-                    <div className={cardClassName}>{cardContent}</div>
-                  )}
-                </motion.div>
-              );
-            })}
+            {trips.map((trip, i) => (
+              <TripCard key={trip.slug} trip={trip} index={i} />
+            ))}
           </div>
         </div>
       </section>
@@ -423,8 +362,8 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto">
           <motion.div
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
@@ -438,8 +377,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
             {/* Big quote, over a real travel photo */}
             <motion.div
-              initial={{ y: 20 }}
-              whileInView={{ y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={vp}
               transition={{ duration: 0.55 }}
               className="relative rounded-3xl overflow-hidden min-h-[320px] flex flex-col justify-end"
@@ -477,8 +416,8 @@ export default function HomePage() {
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ y: 16 }}
-                  whileInView={{ y: 0 }}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={vp}
                   transition={{ duration: 0.45, delay: i * 0.1 }}
                   className="glass rounded-2xl p-6 flex gap-4 items-start"
@@ -490,8 +429,8 @@ export default function HomePage() {
 
               {/* Tags */}
               <motion.div
-                initial={{ y: 16 }}
-                whileInView={{ y: 0 }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={vp}
                 transition={{ duration: 0.45, delay: 0.2 }}
                 className="glass rounded-2xl p-6"
@@ -515,8 +454,8 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto">
           <motion.div
-            initial={{ y: 16 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
@@ -531,8 +470,8 @@ export default function HomePage() {
             {reviews.map((r, i) => (
               <motion.div
                 key={i}
-                initial={{ y: 16 }}
-                whileInView={{ y: 0 }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={vp}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/20 transition-[border-color,transform] duration-300 hover:-translate-y-0.5"
@@ -553,8 +492,8 @@ export default function HomePage() {
       <section className="relative z-10 py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.6 }}
             className="relative rounded-3xl overflow-hidden px-8 py-14 md:px-14 text-center"
