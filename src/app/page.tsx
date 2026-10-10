@@ -1,54 +1,88 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import HomeMoments from "@/components/HomeMoments";
 
-const heroPhotos = [
-  "/чунцин-поезд-через-здание.jpg",
-  "/ченду-мост.jpg",
-  "/чунцин-старый-город.jpg",
-  "/чунцин-ночной-3.jpg",
+const filmstrip = [
+  "/travel-iceland-skogafoss-rainbow.jpg",
+  "/travel-indonesia-komodo-padar.jpg",
+  "/travel-china-chengdu-ifs-panda.jpg",
+  "/travel-australia-twelve-apostles-2.jpg",
+  "/travel-iceland-glacier-lagoon.jpg",
+  "/travel-indonesia-komodo-swim.jpg",
+  "/travel-australia-sydney-opera-2.jpg",
+  "/travel-cyprus-sea-caves.jpg",
+  "/travel-china-chengdu-street.jpg",
+  "/travel-iceland-fjadrargljufur-canyon.jpg",
 ];
 
-const filmstrip = [
-  "/ченду-1.jpg", "/чунцин-2.jpg", "/день-5.jpg", "/индонезия.jpg", "/австралия.jpg",
-  "/чунцин-5.jpg", "/ченду-8.jpg", "/день-7.jpg", "/чунцин-3.jpg", "/ченду-6.jpg",
+const reels = [
+  { src: "/travel-reel-australia-apostles2.mp4", label: "Австралия" },
+  { src: "/travel-reel-iceland-waterfall.mp4", label: "Исландия" },
+  { src: "/travel-reel-indonesia-boat.mp4", label: "Индонезия" },
+  { src: "/travel-reel-china-streets.mp4", label: "Китай" },
+  { src: "/travel-reel-iceland-beach.mp4", label: "Исландия" },
+  { src: "/travel-reel-ocean-sunset.mp4", label: "Австралия" },
+  { src: "/travel-reel-china-food.mp4", label: "Китай" },
+  { src: "/travel-reel-iceland-river.mp4", label: "Исландия" },
+  { src: "/travel-reel-china-night.mp4", label: "Китай" },
+  { src: "/travel-reel-australia-coast.mp4", label: "Австралия" },
+  { src: "/travel-reel-iceland-drive.mp4", label: "Исландия" },
+  { src: "/travel-reel-iceland-waterfall2.mp4", label: "Исландия" },
+  { src: "/travel-reel-iceland-waterfall3.mp4", label: "Исландия" },
 ];
 
 function HeroBackground() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setIndex(i => (i + 1) % heroPhotos.length), 6000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <AnimatePresence>
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 1.06 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.8, ease: "easeInOut" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={heroPhotos[index]}
-            alt=""
-            fill
-            priority={index === 0}
-            className="object-cover"
-            sizes="100vw"
-          />
-        </motion.div>
-      </AnimatePresence>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/travel-australia-twelve-apostles-2.jpg"
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-apostles.mp4" type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/55 via-[#0a0a0f]/75 to-[#0a0a0f]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(200,16,46,0.18),transparent)]" />
+    </div>
+  );
+}
+
+function VideoReel({ src, label }: { src: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const inView = useInView(ref, { margin: "200px" });
+
+  useEffect(() => {
+    if (inView) {
+      videoRef.current?.play().catch(() => {});
+    } else {
+      videoRef.current?.pause();
+    }
+  }, [inView]);
+
+  return (
+    <div ref={ref} className="relative w-40 h-64 md:w-48 md:h-80 rounded-2xl overflow-hidden shrink-0 glass group">
+      {inView && (
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+      <span className="absolute bottom-3 left-3 text-xs font-medium text-white uppercase tracking-wider">{label}</span>
     </div>
   );
 }
@@ -87,7 +121,7 @@ const trips: {
     dates: "Зима 2026",
     duration: "—",
     price: "Уточняется",
-    image: "/индонезия.jpg",
+    image: "/travel-indonesia-komodo-padar.jpg",
     tags: ["Острова", "Джунгли", "Снорклинг", "Комьюнити"],
     status: "development",
   },
@@ -99,7 +133,7 @@ const trips: {
     dates: "Зима – весна 2027",
     duration: "—",
     price: "Уточняется",
-    image: "/австралия.jpg",
+    image: "/travel-australia-twelve-apostles-1.jpg",
     tags: ["Пляжи", "Мегаполисы", "Дикая природа", "Комьюнити"],
     status: "soon",
   },
@@ -229,6 +263,25 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
+      {/* ── Video Reels ── */}
+      <section className="relative z-10 py-16 px-6 overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Живые кадры</p>
+            <h2 className="text-3xl md:text-5xl font-bold">
+              Видео <span className="gradient-text">с поездок</span>
+            </h2>
+          </div>
+        </div>
+        <div className="flex gap-4 overflow-x-auto px-6 pb-2 snap-x snap-mandatory scrollbar-hide max-w-5xl mx-auto">
+          {reels.map((r, i) => (
+            <div key={i} className="snap-start">
+              <VideoReel src={r.src} label={r.label} />
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* ── Stats ── */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 py-20">
@@ -392,7 +445,7 @@ export default function HomePage() {
               className="relative rounded-3xl overflow-hidden min-h-[320px] flex flex-col justify-end"
             >
               <Image
-                src="/чунцин-6.jpg"
+                src="/travel-iceland-glacier-lagoon.jpg"
                 alt=""
                 fill
                 className="object-cover"
@@ -507,7 +560,7 @@ export default function HomePage() {
             className="relative rounded-3xl overflow-hidden px-8 py-14 md:px-14 text-center"
           >
             <Image
-              src="/ченду-5.jpg"
+              src="/travel-indonesia-komodo-padar-sunset.jpg"
               alt=""
               fill
               className="object-cover"

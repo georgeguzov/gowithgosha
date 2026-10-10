@@ -90,6 +90,15 @@ body {
   animation: marquee 30s linear infinite;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 .text-shimmer {
   background: linear-gradient(90deg, #d4a843, #fff, #d4a843, #c8102e, #d4a843);
   background-size: 200% auto;

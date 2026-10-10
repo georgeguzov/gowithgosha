@@ -5,15 +5,28 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const moments = [
-  { src: "/чунцин-киберпанк.jpg",      label: "Чунцин, Китай",  span: "col-span-1 row-span-2" },
-  { src: "/панда-3.jpg",               label: "Чэнду, Китай",   span: "col-span-1 row-span-1" },
-  { src: "/чунцин-старый-город-4.jpg", label: "Чунцин, Китай",  span: "col-span-1 row-span-1" },
-  { src: "/ченду-панда-2.jpg",         label: "Чэнду, Китай",   span: "col-span-1 row-span-1" },
-  { src: "/чунцин-город.jpg",          label: "Чунцин, Китай",  span: "col-span-1 row-span-1" },
-  { src: "/день-6.jpg",                label: "Чунцин, Китай",  span: "col-span-1 row-span-2" },
-  { src: "/ченду-2.jpg",               label: "Чэнду, Китай",   span: "col-span-1 row-span-1" },
-  { src: "/чунцин-4.jpg",              label: "Чунцин, Китай",  span: "col-span-1 row-span-1" },
-  { src: "/ченду-3.jpg",               label: "Чэнду, Китай",   span: "col-span-1 row-span-1" },
+  { src: "/travel-indonesia-komodo-padar.jpg",            label: "Остров Падар, Индонезия", span: "col-span-1 row-span-2" },
+  { src: "/travel-iceland-skogafoss-rainbow.jpg",         label: "Скоугафосс, Исландия",    span: "col-span-1 row-span-1" },
+  { src: "/travel-australia-twelve-apostles-1.jpg",       label: "Great Ocean Road, Австралия", span: "col-span-1 row-span-1" },
+  { src: "/travel-china-chengdu-ifs-panda.jpg",           label: "Чэнду, Китай",            span: "col-span-1 row-span-1" },
+  { src: "/travel-cyprus-sea-caves.jpg",                  label: "Пещеры Айя-Напы, Кипр",   span: "col-span-1 row-span-1" },
+  { src: "/travel-iceland-fjadrargljufur-canyon.jpg",     label: "Фьядрарглйоуфюр, Исландия", span: "col-span-1 row-span-2" },
+  { src: "/travel-australia-kangaroo-2.jpg",               label: "Австралия",               span: "col-span-1 row-span-1" },
+  { src: "/travel-indonesia-komodo-swim.jpg",             label: "Комодо, Индонезия",       span: "col-span-1 row-span-1" },
+  { src: "/travel-china-chengdu-street.jpg",              label: "Чэнду, Китай",            span: "col-span-1 row-span-1" },
+  { src: "/travel-indonesia-bali-uluwatu.jpg",            label: "Улувату, Бали",           span: "col-span-1 row-span-1" },
+  { src: "/travel-italy-lake-maggiore.jpg",                label: "Озеро Маджоре, Италия",   span: "col-span-1 row-span-1" },
+  { src: "/travel-iceland-horses.jpg",                    label: "Исландские лошади",        span: "col-span-1 row-span-1" },
+  { src: "/travel-australia-sydney-opera-1.jpg",           label: "Сидней, Австралия",       span: "col-span-1 row-span-1" },
+  { src: "/travel-indonesia-komodo-sunset.jpg",            label: "Закат на Комодо",          span: "col-span-1 row-span-2" },
+  { src: "/travel-china-chengdu-alley.jpg",                label: "Чэнду, Китай",            span: "col-span-1 row-span-1" },
+  { src: "/travel-australia-twelve-apostles-3.jpg",         label: "Great Ocean Road, Австралия", span: "col-span-1 row-span-1" },
+  { src: "/travel-indonesia-komodo-boat.jpg",               label: "Комодо, Индонезия",       span: "col-span-1 row-span-1" },
+  { src: "/travel-iceland-fjadrargljufur-selfie.jpg",       label: "Фьядрарглйоуфюр, Исландия", span: "col-span-1 row-span-1" },
+  { src: "/travel-australia-sydney-opera-3.jpg",            label: "Сидней, Австралия",       span: "col-span-1 row-span-1" },
+  { src: "/travel-indonesia-komodo-padar-walk.jpg",         label: "Остров Падар, Индонезия", span: "col-span-1 row-span-1" },
+  { src: "/travel-australia-kangaroo-1.jpg",                label: "Австралия",               span: "col-span-1 row-span-1" },
+  { src: "/travel-iceland-skogafoss-rainbow-2.jpg",         label: "Скоугафосс, Исландия",    span: "col-span-1 row-span-1" },
 ];
 
 function MomentCard({ src, label, span, index, inView }: {
