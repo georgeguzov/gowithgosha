@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HomeMoments from "@/components/HomeMoments";
 import Globe from "@/components/Globe";
+import { TelegramIcon, InstagramIcon } from "@/components/icons";
 
 function HeroBackground() {
   return (
@@ -20,10 +21,10 @@ function HeroBackground() {
           muted
           loop
           playsInline
-          poster="/travel-australia-twelve-apostles-2.jpg"
+          poster="/hero-flight-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/hero-apostles.mp4" type="video/mp4" />
+          <source src="/hero-flight.mp4" type="video/mp4" />
         </video>
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/60 via-[#0a0a0f]/80 to-[#0a0a0f]" />
@@ -31,6 +32,12 @@ function HeroBackground() {
     </div>
   );
 }
+
+const socials = [
+  { href: "https://t.me/g_zov", label: "Telegram", icon: TelegramIcon },
+  { href: "https://instagram.com/gowithgosha", label: "@gowithgosha", icon: InstagramIcon },
+  { href: "https://instagram.com/g.zov", label: "@g.zov", icon: InstagramIcon },
+];
 
 type TripStatus = "open" | "closed" | "development" | "soon";
 
@@ -257,7 +264,7 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="shrink-0 relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-[#c8102e]/40 shadow-[0_0_40px_rgba(200,16,46,0.25)]"
             >
-              <Image src="/я.jpg" alt="Гоша Гузов" fill className="object-cover object-top" sizes="160px" />
+              <Image src="/avatar-gosha.jpg" alt="Гоша Гузов" fill className="object-cover" sizes="160px" />
             </motion.div>
 
             {/* Text */}
@@ -266,10 +273,9 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.25 }}
-                className="text-xs font-semibold uppercase tracking-[0.3em] mb-3"
+                className="text-xs font-semibold uppercase tracking-[0.3em] mb-3 text-white"
               >
-                <span className="text-white">Go With Gosha</span>
-                <span className="text-[#ff5a73]"> · Авторские путешествия</span>
+                Go With Gosha
               </motion.p>
 
               <motion.h1
@@ -278,8 +284,8 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-white"
               >
-                Авторские путешествия для тех, кто хочет увидеть мир{" "}
-                <span className="gradient-text">не через окно туристического автобуса.</span>
+                Я показываю мир таким, какой он есть —{" "}
+                <span className="gradient-text">без туристического автобуса за окном.</span>
               </motion.h1>
 
               <motion.p
@@ -288,7 +294,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="text-white/70 text-lg leading-relaxed mb-8"
               >
-                Новые страны. Новые впечатления. Новые люди, которые становятся друзьями и с которыми хочется увидеть ещё полмира.
+                Маленькие группы. Настоящие маршруты. Люди, с которыми захочется вернуться в путь.
               </motion.p>
 
               {/* Social links */}
@@ -298,30 +304,18 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.65 }}
                 className="flex flex-wrap gap-3 justify-center md:justify-start"
               >
-                <a
-                  href="https://t.me/g_zov"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass px-5 py-2.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-300"
-                >
-                  Telegram 💬
-                </a>
-                <a
-                  href="https://instagram.com/gowithgosha"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass px-5 py-2.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-300"
-                >
-                  Instagram 📸
-                </a>
-                <a
-                  href="https://instagram.com/g.zov"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass px-5 py-2.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-300"
-                >
-                  @g.zov 📷
-                </a>
+                {socials.map((s) => (
+                  <a
+                    key={s.href}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group glass pl-3.5 pr-5 py-2.5 rounded-full text-sm text-white/75 hover:text-white hover:border-[#c8102e]/30 transition-colors duration-300 flex items-center gap-2.5"
+                  >
+                    <s.icon className="w-4 h-4 text-white/55 group-hover:text-[#ff5a73] transition-colors duration-300" />
+                    {s.label}
+                  </a>
+                ))}
               </motion.div>
             </div>
           </motion.div>
@@ -374,77 +368,56 @@ export default function HomePage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            {/* Big quote, over a real travel photo */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={vp}
-              transition={{ duration: 0.55 }}
-              className="relative rounded-3xl overflow-hidden min-h-[320px] flex flex-col justify-end"
-            >
-              <Image
-                src="/travel-iceland-glacier-lagoon.jpg"
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/50 to-transparent" />
-              <div className="relative z-10 p-8 md:p-10">
-                <div className="text-5xl text-[#c8102e]/40 font-serif leading-none mb-4 select-none">"</div>
-                <p className="text-lg md:text-xl text-white leading-relaxed">
-                  Большинство туров заканчиваются в аэропорту.
-                </p>
-                <p className="mt-4 text-white/70 leading-relaxed">
-                  Я создаю путешествия и комьюнити, в которых важны не только страны и маршруты, но и люди рядом.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Details */}
-            <div className="space-y-4">
-              {[
-                {
-                  icon: "🌍",
-                  text: "Моя цель — собирать открытых, вабовых и лёгких на подъём ребят с общими ценностями, которые любят приключения, новые знакомства и яркие впечатления.",
-                },
-                {
-                  icon: "🤝",
-                  text: "Чтобы после поездки вы увезли домой не только фотки, но и новых друзей, с которыми захотите путешествовать снова.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={vp}
-                  transition={{ duration: 0.45, delay: i * 0.1 }}
-                  className="glass rounded-2xl p-6 flex gap-4 items-start"
-                >
-                  <span className="text-2xl shrink-0">{item.icon}</span>
-                  <p className="text-[#f5f0e8]/65 leading-relaxed">{item.text}</p>
-                </motion.div>
-              ))}
-
-              {/* Tags */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={vp}
-                transition={{ duration: 0.45, delay: 0.2 }}
-                className="glass rounded-2xl p-6"
-              >
-                <div className="flex flex-wrap gap-2">
-                  {["Небольшие группы", "Атмосфера", "Комьюнити", "Новые знакомства", "Авторские маршруты"].map((tag, i) => (
-                    <span key={i} className="text-xs px-3 py-1.5 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+          {/* Big quote, over a real travel photo */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={vp}
+            transition={{ duration: 0.55 }}
+            className="relative rounded-3xl overflow-hidden min-h-[280px] md:min-h-[360px] flex flex-col justify-end"
+          >
+            <Image
+              src="/travel-iceland-glacier-lagoon.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
+            <div className="relative z-10 p-8 md:p-12 max-w-2xl">
+              <div className="text-5xl text-[#c8102e]/40 font-serif leading-none mb-3 select-none">"</div>
+              <p className="text-xl md:text-2xl text-white leading-snug font-medium">
+                Большинство туров заканчиваются в аэропорту.
+              </p>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Statement */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={vp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-10 md:mt-12 max-w-2xl mx-auto text-center text-lg text-[#f5f0e8]/65 leading-relaxed"
+          >
+            Я собираю открытых и лёгких на подъём людей, которые любят приключения и новые знакомства —
+            чтобы домой вы увезли не только фотки, но и друзей, с которыми захочется путешествовать снова.
+          </motion.p>
+
+          {/* Tags */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={vp}
+            transition={{ duration: 0.45, delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-2 mt-7"
+          >
+            {["Небольшие группы", "Атмосфера", "Комьюнити", "Новые знакомства", "Авторские маршруты"].map((tag, i) => (
+              <span key={i} className="text-xs px-3 py-1.5 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
+                {tag}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </section>
 
