@@ -358,7 +358,7 @@ export default function Globe() {
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "0px 0px 150px 0px" }}
           transition={{ duration: 0.5 }}
           className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4"
         >
@@ -367,7 +367,7 @@ export default function Globe() {
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "0px 0px 150px 0px" }}
           transition={{ duration: 0.5, delay: 0.05 }}
           className="text-3xl md:text-5xl font-bold"
         >
@@ -391,8 +391,8 @@ export default function Globe() {
           <div className="absolute inset-0 z-20">
             <Scene progress={scrollYProgress} fadeIn={[0, 0.08]} fadeOut={[0.25, 0.32]} countWindow={[0.02, 0.22]} value={49} suffix="+" kicker="Стран" label="я увидел своими глазами" />
             <Scene progress={scrollYProgress} fadeIn={[0.34, 0.41]} fadeOut={[0.58, 0.65]} countWindow={[0.36, 0.55]} value={5} suffix=" лет" kicker="В дороге" label="без остановок, без шаблонных туров" />
-            <Scene progress={scrollYProgress} fadeIn={[0.67, 0.74]} fadeOut={[0.88, 0.94]} countWindow={[0.69, 0.87]} value={100} suffix="+" kicker="Перелётов" label="чтобы быть там, где стоит быть" />
-            <Scene progress={scrollYProgress} fadeIn={[0.9, 0.96]} fadeOut={[1, 1]} label="Я знаю, куда стоит ехать — и с кем." />
+            <Scene progress={scrollYProgress} fadeIn={[0.67, 0.74]} fadeOut={[0.82, 0.87]} countWindow={[0.69, 0.8]} value={100} suffix="+" kicker="Перелётов" label="чтобы быть там, где стоит быть" />
+            <Scene progress={scrollYProgress} fadeIn={[0.82, 0.88]} fadeOut={[0.999, 1]} label="Я знаю, куда стоит ехать — и с кем." />
           </div>
 
           <p className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-xs text-white/25">

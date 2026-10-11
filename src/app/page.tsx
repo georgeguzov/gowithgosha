@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, useSpring } from "framer-motion";
+import { motion, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
 import { useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MomentsCarousel from "@/components/MomentsCarousel";
+import FadeImage from "@/components/FadeImage";
 import Globe from "@/components/Globe";
 import { TelegramIcon, InstagramIcon } from "@/components/icons";
 
@@ -116,7 +117,9 @@ const reviews = [
   },
 ];
 
-const vp = { once: true, margin: "-60px" } as const;
+// Positive bottom margin pre-triggers reveal animations before the element is actually
+// scrolled into view, so content is already settled by the time it's visible (no pop-in).
+const vp = { once: true, margin: "0px 0px 150px 0px" } as const;
 
 function TripCard({
   trip,
@@ -148,9 +151,9 @@ function TripCard({
 
   const cardContent = (
     <>
-      <div className="relative h-64 md:h-80 shrink-0 overflow-hidden">
+      <div className="relative h-52 md:h-64 shrink-0 overflow-hidden">
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
-          <Image
+          <FadeImage
             src={trip.image}
             alt={trip.title}
             fill
@@ -183,11 +186,11 @@ function TripCard({
         </div>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-xl font-bold text-[#f5f0e8] mb-1.5">{trip.title}</h3>
-        <p className="text-sm text-[#f5f0e8]/50 mb-5">{trip.subtitle} · {trip.dates}</p>
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-lg font-bold text-[#f5f0e8] mb-1">{trip.title}</h3>
+        <p className="text-sm text-[#f5f0e8]/50 mb-4">{trip.subtitle} · {trip.dates}</p>
 
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-5">
           {trip.tags.map(tag => (
             <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-[#c8102e]/10 text-[#f5f0e8]/60 border border-[#c8102e]/15">
               {tag}
@@ -198,7 +201,7 @@ function TripCard({
         <div className="mt-auto flex items-center justify-between">
           <div>
             <p className="text-xs text-[#f5f0e8]/40 uppercase tracking-widest">Стоимость</p>
-            <p className="text-2xl font-bold text-[#d4a843]">{trip.price}</p>
+            <p className="text-xl font-bold text-[#d4a843]">{trip.price}</p>
           </div>
           {trip.status === "open" ? (
             <div className="glass-red px-4 py-2 rounded-full text-sm font-medium text-[#f5f0e8] group-hover:bg-[#c8102e]/20 transition-colors duration-300">
@@ -236,6 +239,59 @@ function TripCard({
   );
 }
 
+function ReviewCard({ review, index }: { review: (typeof reviews)[number]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const rotateX = useSpring(0, { stiffness: 150, damping: 15 });
+  const rotateY = useSpring(0, { stiffness: 150, damping: 15 });
+  const spotX = useMotionValue(50);
+  const spotY = useMotionValue(50);
+  const spotlight = useMotionTemplate`radial-gradient(240px circle at ${spotX}% ${spotY}%, rgba(200,16,46,0.16), transparent 70%)`;
+
+  function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    rotateY.set((px - 0.5) * 6);
+    rotateX.set(-(py - 0.5) * 6);
+    spotX.set(px * 100);
+    spotY.set(py * 100);
+  }
+  function handleMouseLeave() {
+    rotateX.set(0);
+    rotateY.set(0);
+  }
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={vp}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="relative overflow-hidden glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/25 transition-colors duration-300"
+    >
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ background: spotlight }} />
+
+      <div className="relative z-10 flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c8102e] to-[#d4a843] flex items-center justify-center text-sm font-bold text-white shrink-0">
+          {review.author[0]}
+        </div>
+        <div>
+          <p className="font-semibold text-[#f5f0e8] text-sm">{review.author}</p>
+          {review.role && <p className="text-xs text-[#f5f0e8]/35">{review.role}</p>}
+        </div>
+      </div>
+
+      <div className="relative z-10 text-3xl text-[#c8102e]/20 font-serif leading-none select-none">"</div>
+      <p className="relative z-10 text-[#f5f0e8]/70 leading-relaxed text-sm flex-1">{review.text}</p>
+    </motion.div>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="relative min-h-screen bg-[#0a0a0f] text-[#f5f0e8]">
@@ -264,7 +320,7 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="shrink-0 relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-[#c8102e]/40 shadow-[0_0_40px_rgba(200,16,46,0.25)]"
             >
-              <Image src="/avatar-gosha.jpg" alt="Гоша Гузов" fill className="object-cover" sizes="160px" />
+              <FadeImage src="/avatar-gosha.jpg" alt="Гоша Гузов" fill priority className="object-cover" sizes="160px" />
             </motion.div>
 
             {/* Text */}
@@ -336,7 +392,7 @@ export default function HomePage() {
             <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, i) => (
               <TripCard key={trip.slug} trip={trip} index={i} />
             ))}
@@ -425,21 +481,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {reviews.map((r, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={vp}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="glass rounded-3xl p-7 flex flex-col gap-5 hover:border-[#c8102e]/20 transition-[border-color,transform] duration-300 hover:-translate-y-0.5"
-              >
-                <div className="text-3xl text-[#c8102e]/20 font-serif leading-none select-none">"</div>
-                <p className="text-[#f5f0e8]/70 leading-relaxed text-sm flex-1">{r.text}</p>
-                <div className="border-t border-white/[0.06] pt-4">
-                  <p className="font-semibold text-[#f5f0e8] text-sm">— {r.author}</p>
-                  {r.role && <p className="text-xs text-[#f5f0e8]/35 mt-0.5">{r.role}</p>}
-                </div>
-              </motion.div>
+              <ReviewCard key={i} review={r} index={i} />
             ))}
           </div>
         </div>
