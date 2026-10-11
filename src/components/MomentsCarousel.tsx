@@ -4,13 +4,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import FadeImage from "@/components/FadeImage";
 import { useEffect, useState } from "react";
 
-const SLIDE_MS = 6500;
+const SLIDE_MS = 5000;
 
 const moments = [
   {
-    src: "/travel-iceland-skogafoss-rainbow.jpg",
-    label: "Скоугафосс, Исландия",
-    quote: "Зачем сидеть дома, если можно не сидеть дома?",
+    src: "/travel-iceland-aurora.jpg",
+    label: "Северное сияние, Исландия",
+    quote: "Небо включило RGB-подсветку специально для меня.",
+  },
+  {
+    src: "/travel-japan-osaka-dotonbori.jpg",
+    label: "Осака, Япония",
+    quote: "Это не город, это уровень из видеоигры.",
   },
   {
     src: "/travel-indonesia-komodo-swim.jpg",
@@ -18,14 +23,14 @@ const moments = [
     quote: "Понедельник? Не, я в океане.",
   },
   {
-    src: "/travel-china-chengdu-ifs-panda.jpg",
-    label: "Чэнду, Китай",
-    quote: "Паспорт, кроссовки, вайб — поехали.",
+    src: "/travel-indonesia-bromo-sunrise.jpg",
+    label: "Вулкан Бромо, Индонезия",
+    quote: "Теперь живу над облаками. Звоните в рабочее время облаков.",
   },
   {
-    src: "/travel-australia-twelve-apostles-1.jpg",
-    label: "Great Ocean Road, Австралия",
-    quote: "Кто сказал, что жизнь одна? У меня их уже пять.",
+    src: "/travel-hongkong-victoria-peak.jpg",
+    label: "Гонконг",
+    quote: "Netflix, подожди — у меня тут целый город светится.",
   },
   {
     src: "/travel-cyprus-sea-caves.jpg",
@@ -33,9 +38,54 @@ const moments = [
     quote: "Это не отпуск, это терапия подешевле.",
   },
   {
+    src: "/travel-iceland-skogafoss-arms.jpg",
+    label: "Скоугафосс, Исландия",
+    quote: "Радуга бесплатно, эмоции тоже.",
+  },
+  {
+    src: "/travel-china-chengdu-ifs-panda.jpg",
+    label: "Чэнду, Китай",
+    quote: "Паспорт, кроссовки, вайб — поехали.",
+  },
+  {
+    src: "/travel-indonesia-komodo-padar-golden.jpg",
+    label: "Остров Падар, Индонезия",
+    quote: "Шаг за шагом к виду, который не влезет в сторис.",
+  },
+  {
+    src: "/travel-indonesia-ijen-crater.jpg",
+    label: "Кавах-Иджен, Индонезия",
+    quote: "Скин для майнкрафта? Нет, просто вторник на вулкане.",
+  },
+  {
+    src: "/travel-australia-twelve-apostles-1.jpg",
+    label: "Great Ocean Road, Австралия",
+    quote: "Кто сказал, что жизнь одна? У меня их уже пять.",
+  },
+  {
+    src: "/travel-iceland-gljufrabui-cave.jpg",
+    label: "Скрытый водопад, Исландия",
+    quote: "Нашёл чит-код на природу. Делюсь не со всеми.",
+  },
+  {
+    src: "/travel-australia-kangaroo-3.jpg",
+    label: "Австралия",
+    quote: "Завёл нового друга. Не отвечает на сообщения, зато кенгуру.",
+  },
+  {
+    src: "/travel-france-alps-montblanc.jpg",
+    label: "Монблан, Альпы",
+    quote: "Горы выше, чем мои ожидания от этой недели.",
+  },
+  {
+    src: "/travel-indonesia-bali-waterfall.jpg",
+    label: "Бали, Индонезия",
+    quote: "Wi-Fi не ловит. Зато ловлю себя на мысли, что это рай.",
+  },
+  {
     src: "/travel-italy-lake-maggiore.jpg",
     label: "Озеро Маджоре, Италия",
-    quote: "Пока вы скроллите, я коллекционирую закаты.",
+    quote: "Боже, храни это озеро и мой аппетит на пасту.",
   },
 ];
 
@@ -113,14 +163,14 @@ export default function MomentsCarousel() {
       <button
         onClick={() => go(-1)}
         aria-label="Предыдущее фото"
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full glass flex items-center justify-center text-white/70 hover:text-white opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full glass flex items-center justify-center text-white/70 hover:text-white opacity-50 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300"
       >
         <ArrowIcon dir="left" />
       </button>
       <button
         onClick={() => go(1)}
         aria-label="Следующее фото"
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full glass flex items-center justify-center text-white/70 hover:text-white opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full glass flex items-center justify-center text-white/70 hover:text-white opacity-50 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300"
       >
         <ArrowIcon dir="right" />
       </button>
