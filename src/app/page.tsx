@@ -497,7 +497,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="relative rounded-3xl overflow-hidden px-8 py-14 md:px-14 text-center"
           >
-            <Image
+            <FadeImage
               src="/travel-indonesia-komodo-padar-sunset.jpg"
               alt=""
               fill

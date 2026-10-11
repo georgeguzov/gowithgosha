@@ -11,6 +11,7 @@ const moments = [
     src: "/travel-iceland-aurora.jpg",
     label: "Северное сияние, Исландия",
     quote: "Небо включило RGB-подсветку специально для меня.",
+    pos: "50% 72%",
   },
   {
     src: "/travel-japan-osaka-dotonbori.jpg",
@@ -26,11 +27,13 @@ const moments = [
     src: "/travel-indonesia-bromo-sunrise.jpg",
     label: "Вулкан Бромо, Индонезия",
     quote: "Теперь живу над облаками. Звоните в рабочее время облаков.",
+    pos: "50% 25%",
   },
   {
     src: "/travel-hongkong-victoria-peak.jpg",
     label: "Гонконг",
     quote: "Netflix, подожди — у меня тут целый город светится.",
+    pos: "50% 70%",
   },
   {
     src: "/travel-cyprus-sea-caves.jpg",
@@ -68,19 +71,10 @@ const moments = [
     quote: "Нашёл чит-код на природу. Делюсь не со всеми.",
   },
   {
-    src: "/travel-australia-kangaroo-3.jpg",
-    label: "Австралия",
-    quote: "Завёл нового друга. Не отвечает на сообщения, зато кенгуру.",
-  },
-  {
     src: "/travel-france-alps-montblanc.jpg",
     label: "Монблан, Альпы",
     quote: "Горы выше, чем мои ожидания от этой недели.",
-  },
-  {
-    src: "/travel-indonesia-bali-waterfall.jpg",
-    label: "Бали, Индонезия",
-    quote: "Wi-Fi не ловит. Зато ловлю себя на мысли, что это рай.",
+    pos: "50% 15%",
   },
   {
     src: "/travel-italy-lake-maggiore.jpg",
@@ -137,27 +131,14 @@ export default function MomentsCarousel() {
             alt={moments[index].label}
             fill
             className="object-cover"
+            style={{ objectPosition: moments[index].pos ?? "50% 50%" }}
             sizes="(max-width: 1024px) 100vw, 1024px"
             priority={index === 0}
           />
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/35 to-transparent pointer-events-none" />
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.4 }}
-          className="relative z-10 p-8 md:p-12 max-w-2xl pointer-events-none"
-        >
-          <div className="text-5xl text-[#c8102e]/40 font-serif leading-none mb-3 select-none">&ldquo;</div>
-          <p className="text-xl md:text-2xl text-white leading-snug font-medium">{moments[index].quote}</p>
-        </motion.div>
-      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/80 to-transparent pointer-events-none" />
 
       {/* prev / next */}
       <button
@@ -175,42 +156,62 @@ export default function MomentsCarousel() {
         <ArrowIcon dir="right" />
       </button>
 
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute bottom-6 right-6 md:right-8 text-xs text-white/55 z-10"
-        >
-          {moments[index].label}
-        </motion.span>
-      </AnimatePresence>
-
-      {/* dots doubling as a progress timer */}
-      <div className="absolute bottom-6 left-8 md:left-12 flex gap-1.5 z-10">
-        {moments.map((m, i) => (
-          <button
-            key={m.src}
-            onClick={() => setIndex(i)}
-            aria-label={m.label}
-            className={`relative h-1.5 rounded-full overflow-hidden bg-white/25 hover:bg-white/40 transition-[width] duration-300 ${
-              i === index ? "w-8" : "w-1.5"
-            }`}
+      {/* bottom-anchored content: quote sits directly above the dots/caption row, never over a face */}
+      <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.4 }}
+            className="px-8 md:px-12 pt-10 pointer-events-none max-w-2xl"
           >
-            {i === index && (
-              <span
-                key={index}
-                className="absolute inset-y-0 left-0 bg-[#d4a843]"
-                style={{
-                  animation: `carousel-fill ${SLIDE_MS}ms linear forwards`,
-                  animationPlayState: paused ? "paused" : "running",
-                }}
-              />
-            )}
-          </button>
-        ))}
+            <div className="text-4xl text-[#c8102e]/40 font-serif leading-none mb-2 select-none">&ldquo;</div>
+            <p className="text-lg md:text-2xl text-white leading-snug font-medium [text-shadow:0_2px_12px_rgba(0,0,0,0.5)]">
+              {moments[index].quote}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="flex items-center justify-between gap-4 px-8 md:px-12 py-6">
+          <div className="flex gap-1.5">
+            {moments.map((m, i) => (
+              <button
+                key={m.src}
+                onClick={() => setIndex(i)}
+                aria-label={m.label}
+                className={`relative h-1.5 rounded-full overflow-hidden bg-white/25 hover:bg-white/40 transition-[width] duration-300 ${
+                  i === index ? "w-8" : "w-1.5"
+                }`}
+              >
+                {i === index && (
+                  <span
+                    key={index}
+                    className="absolute inset-y-0 left-0 bg-[#d4a843]"
+                    style={{
+                      animation: `carousel-fill ${SLIDE_MS}ms linear forwards`,
+                      animationPlayState: paused ? "paused" : "running",
+                    }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-xs text-white/55 shrink-0"
+            >
+              {moments[index].label}
+            </motion.span>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
