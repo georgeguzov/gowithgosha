@@ -11,7 +11,7 @@ const moments = [
     src: "/travel-iceland-aurora.jpg",
     label: "Северное сияние, Исландия",
     quote: "Небо включило RGB-подсветку специально для меня.",
-    pos: "50% 72%",
+    pos: "50% 58%",
   },
   {
     src: "/travel-japan-osaka-dotonbori.jpg",
@@ -74,7 +74,7 @@ const moments = [
     src: "/travel-france-alps-montblanc.jpg",
     label: "Монблан, Альпы",
     quote: "Горы выше, чем мои ожидания от этой недели.",
-    pos: "50% 15%",
+    pos: "50% 38%",
   },
   {
     src: "/travel-italy-lake-maggiore.jpg",
