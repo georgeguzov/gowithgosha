@@ -46,10 +46,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 glass-red rounded-full px-4 py-2 text-sm mb-8"
+          className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm mb-8 border border-[#d4a843]/40 bg-[#d4a843]/[0.08] backdrop-blur"
         >
-          <span className="text-xs">🔒</span>
-          <span className="text-[#f5f0e8]/80">Набор закрыт · 16–24 октября 2026</span>
+          <span className="text-[#d4a843] font-bold">✓</span>
+          <span className="text-[#f5f0e8]/80"><span className="text-[#d4a843] font-semibold">Тур пройден</span> · 16–24 октября 2026</span>
         </motion.div>
 
         {/* Main heading */}
@@ -83,10 +83,10 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <a
-            href="#contact"
+            href="#recap"
             className="group relative px-8 py-4 bg-[#c8102e] rounded-full text-white font-semibold text-lg overflow-hidden transition-transform duration-300 hover:scale-105 animate-pulse-glow"
           >
-            <span className="relative z-10">Хочу в тур</span>
+            <span className="relative z-10">Как это было</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#c8102e] to-[#ff3355] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a

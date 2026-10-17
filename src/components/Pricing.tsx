@@ -39,7 +39,7 @@ export default function Pricing() {
         >
           <p className="text-[#c8102e] text-sm font-semibold uppercase tracking-[0.3em] mb-4">Стоимость</p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Панды и Киберпанк&nbsp;— <span className="gradient-text">$&thinsp;1&thinsp;490</span>
+            Панды и Киберпанк&nbsp;— <span className="gradient-text whitespace-nowrap">$&thinsp;1&thinsp;490</span>
           </h2>
           <p className="text-[#f5f0e8]/50 max-w-xl mx-auto">
             Мы уже организовали маршрут, отели, трансферы и все основные активности. Вам остаётся купить билет и наслаждаться путешествием.
@@ -118,8 +118,8 @@ export default function Pricing() {
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-[#f5f0e8]/50 uppercase tracking-widest mb-1">Статус</p>
-                  <p className="text-base font-semibold text-[#f5f0e8]/60 flex items-center gap-1.5 justify-end">
-                    <span className="text-xs">🔒</span> Набор закрыт
+                  <p className="text-base font-semibold text-[#f5f0e8]/60 flex items-center gap-1.5 justify-end whitespace-nowrap">
+                    <span className="text-[#d4a843]">✓</span> Тур пройден
                   </p>
                 </div>
               </div>
@@ -134,9 +134,9 @@ export default function Pricing() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="text-center"
         >
-          <div className="glass rounded-full inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 text-[#f5f0e8]/60 font-semibold text-lg md:text-xl">
-            <span className="text-xs">🔒</span>
-            <span>Набор на эту дату закрыт</span>
+          <div className="glass rounded-full inline-flex items-center gap-3 px-6 py-4 md:px-10 md:py-5 text-[#f5f0e8]/60 font-semibold text-base sm:text-lg md:text-xl whitespace-nowrap">
+            <span className="text-[#d4a843]">✓</span>
+            <span>Этот тур уже состоялся</span>
           </div>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             <a

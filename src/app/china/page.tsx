@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import TripRecap from "@/components/TripRecap";
 import Ticker from "@/components/Ticker";
 import About from "@/components/About";
 import Gallery from "@/components/Gallery";
@@ -14,10 +15,10 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Панды и Киберпанк — Авторский тур в Китай",
-  description: "Чэнду + Чунцин, 16–24 октября 2026. Авторский тур.",
+  description: "Чэнду + Чунцин, 16–24 октября 2026. Прошедший авторский тур — программа и как это было.",
   openGraph: {
     title: "Панды и Киберпанк — Авторский тур в Китай",
-    description: "Чэнду + Чунцин, 16–24 октября 2026. Авторский тур.",
+    description: "Чэнду + Чунцин, 16–24 октября 2026. Прошедший авторский тур — программа и как это было.",
     url: "https://gowithgosha.xyz/china",
     images: [{ url: "/ченду-панда-1.jpg", width: 720, height: 960 }],
   },
@@ -37,6 +38,7 @@ export default function ChinaPage() {
       </div>
 
       <Hero />
+      <TripRecap slug="china" />
       <Ticker />
       <About />
       <Gallery />

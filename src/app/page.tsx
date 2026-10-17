@@ -7,6 +7,7 @@ import Link from "next/link";
 import MomentsCarousel from "@/components/MomentsCarousel";
 import FadeImage from "@/components/FadeImage";
 import Globe from "@/components/Globe";
+import PastTrips from "@/components/PastTrips";
 import { TelegramIcon, InstagramIcon } from "@/components/icons";
 
 function HeroBackground() {
@@ -54,18 +55,6 @@ const trips: {
   tags: string[];
   status: TripStatus;
 }[] = [
-  {
-    slug: "china",
-    country: "Китай",
-    title: "Панды и Киберпанк",
-    subtitle: "Чэнду + Чунцин",
-    dates: "16–24 октября 2026",
-    duration: "9 дней",
-    price: "$1 490",
-    image: "/ченду-панда-1.jpg",
-    tags: ["Панды", "Киберпанк", "Хот-пот", "Небольшая группа"],
-    status: "closed",
-  },
   {
     slug: "indonesia",
     country: "Индонезия",
@@ -378,7 +367,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Туры ── */}
+      {/* ── Предстоящие туры ── */}
       <section id="tours" className="relative z-10 py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -388,17 +377,20 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="flex items-baseline gap-4 mb-10"
           >
-            <h2 className="text-2xl md:text-3xl font-bold">Туры</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">Предстоящие туры</h2>
             <div className="flex-1 h-px bg-gradient-to-r from-[#c8102e]/30 to-transparent" />
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {trips.map((trip, i) => (
               <TripCard key={trip.slug} trip={trip} index={i} />
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── Прошедшие туры ── */}
+      <PastTrips />
 
       {/* ── Карта и статистика ── */}
       <Globe />
